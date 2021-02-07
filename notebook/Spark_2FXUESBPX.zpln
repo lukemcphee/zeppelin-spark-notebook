@@ -1,0 +1,602 @@
+{
+  "paragraphs": [
+    {
+      "text": "val i \u003d \"hello world\"\nprintln(i)",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:24:18.246",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "hello world\n\u001b[1m\u001b[34mi\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d hello world\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612622335709_1646379887",
+      "id": "paragraph_1612622335709_1646379887",
+      "dateCreated": "2021-02-06 14:38:55.709",
+      "dateStarted": "2021-02-07 16:24:18.368",
+      "dateFinished": "2021-02-07 16:24:19.450",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.sql.SparkSession\n\nval spark \u003d SparkSession.builder.config(sc.getConf).getOrCreate()",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:24:19.482",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.SparkSession\n\u001b[1m\u001b[34mspark\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m \u003d org.apache.spark.sql.SparkSession@6d3b3369\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612622440954_663230290",
+      "id": "paragraph_1612622440954_663230290",
+      "dateCreated": "2021-02-06 14:40:40.955",
+      "dateStarted": "2021-02-07 16:24:19.859",
+      "dateFinished": "2021-02-07 16:24:20.486",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val df \u003d spark.read\n         .format(\"csv\")\n         .option(\"header\", \"true\") // first line in file has headers\n         .option(\"mode\", \"DROPMALFORMED\")\n         .option(\"inferSchema\", \"true\") // allows us to access the underlying types, super helpful\n         .load(\"/notebook/vaccinations.csv\")",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:24:20.687",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [location: string, iso_code: string ... 10 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://dd7733ed78eb:4040/jobs/job?id\u003d51"
+            },
+            {
+              "jobUrl": "http://dd7733ed78eb:4040/jobs/job?id\u003d52"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612622859146_2694864",
+      "id": "paragraph_1612622859146_2694864",
+      "dateCreated": "2021-02-06 14:47:39.146",
+      "dateStarted": "2021-02-07 16:24:20.898",
+      "dateFinished": "2021-02-07 16:24:23.359",
+      "status": "FINISHED"
+    },
+    {
+      "text": "df.printSchema",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:24:23.400",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- location: string (nullable \u003d true)\n |-- iso_code: string (nullable \u003d true)\n |-- date: timestamp (nullable \u003d true)\n |-- total_vaccinations: integer (nullable \u003d true)\n |-- people_vaccinated: integer (nullable \u003d true)\n |-- people_fully_vaccinated: integer (nullable \u003d true)\n |-- daily_vaccinations_raw: integer (nullable \u003d true)\n |-- daily_vaccinations: integer (nullable \u003d true)\n |-- total_vaccinations_per_hundred: double (nullable \u003d true)\n |-- people_vaccinated_per_hundred: double (nullable \u003d true)\n |-- people_fully_vaccinated_per_hundred: double (nullable \u003d true)\n |-- daily_vaccinations_per_million: integer (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612622448092_1801488894",
+      "id": "paragraph_1612622448092_1801488894",
+      "dateCreated": "2021-02-06 14:40:48.093",
+      "dateStarted": "2021-02-07 16:24:23.582",
+      "dateFinished": "2021-02-07 16:24:24.188",
+      "status": "FINISHED"
+    },
+    {
+      "text": "df.groupBy(\"location\").sum(\"daily_vaccinations\").sort(desc(\"sum(daily_vaccinations)\")).show",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:24:24.293",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------------+-----------------------+\n|            location|sum(daily_vaccinations)|\n+--------------------+-----------------------+\n|               World|               93141451|\n|       United States|               29051988|\n|               China|               21794325|\n|      European Union|               12467015|\n|      United Kingdom|                8359454|\n|             England|                7281923|\n|              Israel|                4820836|\n|               India|                3956025|\n|              Turkey|                2657608|\n|             Germany|                2400276|\n|United Arab Emirates|                2317170|\n|               Italy|                1900077|\n|              Brazil|                1839811|\n|               Spain|                1575956|\n|              France|                1429536|\n|              Poland|                1134067|\n|              Russia|                 927026|\n|              Canada|                 679650|\n|              Mexico|                 669491|\n|             Romania|                 669169|\n+--------------------+-----------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://dd7733ed78eb:4040/jobs/job?id\u003d53"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612623232734_733436876",
+      "id": "paragraph_1612623232734_733436876",
+      "dateCreated": "2021-02-06 14:53:52.734",
+      "dateStarted": "2021-02-07 16:24:24.344",
+      "dateFinished": "2021-02-07 16:24:29.235",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val all \u003d df.select(\"location\", \"date\", \"daily_vaccinations\").filter(col(\"daily_vaccinations\").isNotNull).withColumn(\"date\", to_date(col(\"date\"),\"yyyy-MM-dd\"))\nall.createOrReplaceTempView(\"all\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:36:01.998",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mall\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [location: string, date: date ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612712267092_830189056",
+      "id": "paragraph_1612712267092_830189056",
+      "dateCreated": "2021-02-07 15:37:47.094",
+      "dateStarted": "2021-02-07 16:36:02.035",
+      "dateFinished": "2021-02-07 16:36:02.714",
+      "status": "FINISHED"
+    },
+    {
+      "text": "all.printSchema\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:36:04.030",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- location: string (nullable \u003d true)\n |-- date: date (nullable \u003d true)\n |-- daily_vaccinations: integer (nullable \u003d true)\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612623387009_347893629",
+      "id": "paragraph_1612623387009_347893629",
+      "dateCreated": "2021-02-06 14:56:27.023",
+      "dateStarted": "2021-02-07 16:36:04.085",
+      "dateFinished": "2021-02-07 16:36:04.547",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\nselect location, date, daily_vaccinations from all",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:36:07.594",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300.0,
+              "optionOpen": true,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "date": "string",
+                      "daily_vaccinations": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "forceY": false,
+                  "lineWithFocus": false
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "date",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "location",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "daily_vaccinations",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "location\tdate\tdaily_vaccinations\nAlgeria\t2021-01-30\t30\nAndorra\t2021-01-26\t66\nAndorra\t2021-01-27\t66\nAndorra\t2021-01-28\t66\nAndorra\t2021-01-29\t66\nAndorra\t2021-01-30\t66\nAndorra\t2021-01-31\t66\nAndorra\t2021-02-01\t66\nArgentina\t2020-12-30\t15656\nArgentina\t2020-12-31\t15656\nArgentina\t2021-01-01\t11070\nArgentina\t2021-01-02\t8776\nArgentina\t2021-01-03\t7400\nArgentina\t2021-01-04\t6483\nArgentina\t2021-01-05\t7984\nArgentina\t2021-01-06\t8173\nArgentina\t2021-01-07\t8363\nArgentina\t2021-01-08\t10519\nArgentina\t2021-01-09\t11942\nArgentina\t2021-01-10\t13365\nArgentina\t2021-01-11\t14788\nArgentina\t2021-01-12\t14056\nArgentina\t2021-01-13\t13323\nArgentina\t2021-01-14\t13320\nArgentina\t2021-01-15\t13317\nArgentina\t2021-01-16\t12971\nArgentina\t2021-01-17\t12624\nArgentina\t2021-01-18\t12278\nArgentina\t2021-01-19\t11932\nArgentina\t2021-01-20\t11586\nArgentina\t2021-01-21\t11704\nArgentina\t2021-01-22\t11263\nArgentina\t2021-01-23\t11124\nArgentina\t2021-01-24\t10342\nArgentina\t2021-01-25\t9046\nArgentina\t2021-01-26\t9626\nArgentina\t2021-01-27\t10014\nArgentina\t2021-01-28\t8896\nArgentina\t2021-01-29\t9205\nArgentina\t2021-01-30\t11189\nArgentina\t2021-01-31\t11299\nArgentina\t2021-02-01\t11924\nAustria\t2021-01-11\t4775\nAustria\t2021-01-12\t3194\nAustria\t2021-01-13\t4427\nAustria\t2021-01-14\t5644\nAustria\t2021-01-15\t6593\nAustria\t2021-01-16\t7270\nAustria\t2021-01-17\t6952\nAustria\t2021-01-18\t7065\nAustria\t2021-01-19\t8334\nAustria\t2021-01-20\t9833\nAustria\t2021-01-21\t11270\nAustria\t2021-01-22\t12144\nAustria\t2021-01-23\t12278\nAustria\t2021-01-24\t12013\nAustria\t2021-01-25\t11477\nAustria\t2021-01-26\t11346\nAustria\t2021-01-27\t10013\nAustria\t2021-01-28\t8741\nAustria\t2021-01-29\t8095\nAustria\t2021-01-30\t8690\nAustria\t2021-01-31\t8709\nAustria\t2021-02-01\t8714\nAustria\t2021-02-02\t8294\nBahrain\t2020-12-24\t11106\nBahrain\t2020-12-25\t5789\nBahrain\t2020-12-26\t4197\nBahrain\t2020-12-27\t3662\nBahrain\t2020-12-28\t3210\nBahrain\t2020-12-29\t2846\nBahrain\t2020-12-30\t2622\nBahrain\t2020-12-31\t1225\nBahrain\t2021-01-01\t1258\nBahrain\t2021-01-02\t1220\nBahrain\t2021-01-03\t1011\nBahrain\t2021-01-04\t943\nBahrain\t2021-01-05\t1122\nBahrain\t2021-01-06\t1594\nBahrain\t2021-01-07\t1942\nBahrain\t2021-01-08\t2706\nBahrain\t2021-01-09\t3437\nBahrain\t2021-01-10\t4080\nBahrain\t2021-01-11\t4427\nBahrain\t2021-01-12\t4840\nBahrain\t2021-01-13\t4699\nBahrain\t2021-01-14\t5332\nBahrain\t2021-01-15\t6361\nBahrain\t2021-01-16\t7572\nBahrain\t2021-01-17\t7473\nBahrain\t2021-01-18\t7176\nBahrain\t2021-01-19\t6546\nBahrain\t2021-01-20\t6110\nBahrain\t2021-01-21\t5457\nBahrain\t2021-01-22\t4084\nBahrain\t2021-01-23\t2555\nBahrain\t2021-01-24\t2445\nBahrain\t2021-01-25\t2784\nBahrain\t2021-01-26\t3194\nBahrain\t2021-01-27\t3372\nBahrain\t2021-01-28\t3096\nBahrain\t2021-01-29\t2629\nBahrain\t2021-01-30\t2199\nBahrain\t2021-01-31\t1841\nBahrain\t2021-02-01\t1514\nBahrain\t2021-02-02\t1160\nBelgium\t2020-12-29\t1\nBelgium\t2020-12-30\t240\nBelgium\t2020-12-31\t163\nBelgium\t2021-01-01\t124\nBelgium\t2021-01-02\t99\nBelgium\t2021-01-03\t83\nBelgium\t2021-01-04\t71\nBelgium\t2021-01-05\t288\nBelgium\t2021-01-06\t772\nBelgium\t2021-01-07\t1921\nBelgium\t2021-01-08\t3225\nBelgium\t2021-01-09\t3679\nBelgium\t2021-01-10\t3735\nBelgium\t2021-01-11\t4512\nBelgium\t2021-01-12\t6505\nBelgium\t2021-01-13\t8851\nBelgium\t2021-01-14\t10739\nBelgium\t2021-01-15\t12627\nBelgium\t2021-01-16\t12883\nBelgium\t2021-01-17\t13274\nBelgium\t2021-01-18\t13919\nBelgium\t2021-01-19\t14328\nBelgium\t2021-01-20\t14280\nBelgium\t2021-01-21\t15288\nBelgium\t2021-01-22\t16090\nBelgium\t2021-01-23\t16458\nBelgium\t2021-01-24\t16274\nBelgium\t2021-01-25\t16324\nBelgium\t2021-01-26\t15196\nBelgium\t2021-01-27\t14191\nBelgium\t2021-01-28\t12655\nBelgium\t2021-01-29\t10848\nBelgium\t2021-01-30\t10218\nBelgium\t2021-01-31\t10052\nBelgium\t2021-02-01\t8978\nBermuda\t2021-01-11\t278\nBermuda\t2021-01-12\t278\nBermuda\t2021-01-13\t278\nBermuda\t2021-01-14\t278\nBermuda\t2021-01-15\t278\nBermuda\t2021-01-16\t278\nBermuda\t2021-01-17\t264\nBermuda\t2021-01-18\t250\nBermuda\t2021-01-19\t236\nBermuda\t2021-01-20\t222\nBermuda\t2021-01-21\t209\nBermuda\t2021-01-22\t195\nBermuda\t2021-01-23\t181\nBrazil\t2021-01-17\t112\nBrazil\t2021-01-18\t554\nBrazil\t2021-01-19\t3823\nBrazil\t2021-01-20\t7136\nBrazil\t2021-01-21\t27304\nBrazil\t2021-01-22\t40980\nBrazil\t2021-01-23\t76825\nBrazil\t2021-01-24\t86373\nBrazil\t2021-01-25\t99928\nBrazil\t2021-01-26\t119630\nBrazil\t2021-01-27\t157335\nBrazil\t2021-01-28\t187769\nBrazil\t2021-01-29\t203165\nBrazil\t2021-01-30\t209348\nBrazil\t2021-01-31\t209905\nBrazil\t2021-02-01\t203386\nBrazil\t2021-02-02\t206238\nBulgaria\t2020-12-30\t2889\nBulgaria\t2020-12-31\t1477\nBulgaria\t2021-01-01\t1007\nBulgaria\t2021-01-02\t799\nBulgaria\t2021-01-03\t675\nBulgaria\t2021-01-04\t592\nBulgaria\t2021-01-05\t533\nBulgaria\t2021-01-06\t472\nBulgaria\t2021-01-07\t920\nBulgaria\t2021-01-08\t1231\nBulgaria\t2021-01-09\t1222\nBulgaria\t2021-01-10\t1246\nBulgaria\t2021-01-11\t1270\nBulgaria\t2021-01-12\t1476\nBulgaria\t2021-01-13\t1304\nBulgaria\t2021-01-14\t938\nBulgaria\t2021-01-15\t682\nBulgaria\t2021-01-16\t694\nBulgaria\t2021-01-17\t662\nBulgaria\t2021-01-18\t782\nBulgaria\t2021-01-19\t921\nBulgaria\t2021-01-20\t1013\nBulgaria\t2021-01-21\t1081\nBulgaria\t2021-01-22\t1139\nBulgaria\t2021-01-23\t1112\nBulgaria\t2021-01-24\t1099\nBulgaria\t2021-01-25\t1023\nBulgaria\t2021-01-26\t985\nBulgaria\t2021-01-27\t1256\nBulgaria\t2021-01-28\t1769\nBulgaria\t2021-01-29\t2101\nBulgaria\t2021-01-30\t2129\nBulgaria\t2021-01-31\t2140\nBulgaria\t2021-02-01\t2262\nBulgaria\t2021-02-02\t2399\nCanada\t2021-01-13\t4282\nCanada\t2021-01-14\t7285\nCanada\t2021-01-15\t10736\nCanada\t2021-01-16\t14575\nCanada\t2021-01-17\t18415\nCanada\t2021-01-18\t22255\nCanada\t2021-01-19\t27529\nCanada\t2021-01-20\t28179\nCanada\t2021-01-21\t56525\nCanada\t2021-01-22\t58593\nCanada\t2021-01-23\t57133\nCanada\t2021-01-24\t55673\nCanada\t2021-01-25\t54213\nCanada\t2021-01-26\t52466\nCanada\t2021-01-27\t57828\nCanada\t2021-01-28\t29173\nCanada\t2021-01-29\t26423\nCanada\t2021-01-30\t25822\nCanada\t2021-01-31\t25221\nCanada\t2021-02-01\t24619\nCanada\t2021-02-02\t22705\nChile\t2020-12-25\t4771\nChile\t2020-12-26\t3958\nChile\t2020-12-27\t2742\nChile\t2020-12-28\t2069\nChile\t2020-12-29\t1665\nChile\t2020-12-30\t1396\nChile\t2020-12-31\t1204\nChile\t2021-01-01\t530\nChile\t2021-01-02\t88\nChile\t2021-01-03\t51\nChile\t2021-01-04\t51\nChile\t2021-01-05\t250\nChile\t2021-01-06\t272\nChile\t2021-01-07\t344\nChile\t2021-01-08\t417\nChile\t2021-01-09\t489\nChile\t2021-01-10\t562\nChile\t2021-01-11\t635\nChile\t2021-01-12\t508\nChile\t2021-01-13\t559\nChile\t2021-01-14\t1038\nChile\t2021-01-15\t1437\nChile\t2021-01-16\t1366\nChile\t2021-01-17\t1291\nChile\t2021-01-18\t2699\nChile\t2021-01-19\t5267\nChile\t2021-01-20\t5632\nChile\t2021-01-21\t6328\nChile\t2021-01-22\t5882\nChile\t2021-01-23\t6000\nChile\t2021-01-24\t6020\nChile\t2021-01-25\t4557\nChile\t2021-01-26\t2235\nChile\t2021-01-27\t1866\nChile\t2021-01-28\t613\nChile\t2021-01-29\t581\nChile\t2021-01-30\t455\nChile\t2021-01-31\t919\nChile\t2021-02-01\t1384\nChile\t2021-02-02\t1547\nChina\t2020-12-16\t187500\nChina\t2020-12-17\t187500\nChina\t2020-12-18\t187500\nChina\t2020-12-19\t187500\nChina\t2020-12-20\t187500\nChina\t2020-12-21\t187500\nChina\t2020-12-22\t187500\nChina\t2020-12-23\t187500\nChina\t2020-12-24\t187500\nChina\t2020-12-25\t187500\nChina\t2020-12-26\t187500\nChina\t2020-12-27\t187500\nChina\t2020-12-28\t187500\nChina\t2020-12-29\t187500\nChina\t2020-12-30\t187500\nChina\t2020-12-31\t187500\nChina\t2021-01-01\t232143\nChina\t2021-01-02\t276786\nChina\t2021-01-03\t321429\nChina\t2021-01-04\t366071\nChina\t2021-01-05\t410714\nChina\t2021-01-06\t455357\nChina\t2021-01-07\t500000\nChina\t2021-01-08\t500000\nChina\t2021-01-09\t500000\nChina\t2021-01-10\t464286\nChina\t2021-01-11\t428571\nChina\t2021-01-12\t392857\nChina\t2021-01-13\t357143\nChina\t2021-01-14\t387755\nChina\t2021-01-15\t418367\nChina\t2021-01-16\t448980\nChina\t2021-01-17\t515306\nChina\t2021-01-18\t581633\nChina\t2021-01-19\t647959\nChina\t2021-01-20\t714286\nChina\t2021-01-21\t770755\nChina\t2021-01-22\t827224\nChina\t2021-01-23\t883694\nChina\t2021-01-24\t940163\nChina\t2021-01-25\t996633\nChina\t2021-01-26\t1053102\nChina\t2021-01-27\t1109571\nChina\t2021-01-28\t995097\nChina\t2021-01-29\t880622\nChina\t2021-01-30\t766148\nChina\t2021-01-31\t651673\nCosta Rica\t2020-12-25\t240\nCosta Rica\t2020-12-26\t240\nCosta Rica\t2020-12-27\t240\nCosta Rica\t2020-12-28\t240\nCosta Rica\t2020-12-29\t240\nCosta Rica\t2020-12-30\t240\nCosta Rica\t2020-12-31\t240\nCosta Rica\t2021-01-01\t240\nCosta Rica\t2021-01-02\t240\nCosta Rica\t2021-01-03\t240\nCosta Rica\t2021-01-04\t414\nCosta Rica\t2021-01-05\t588\nCosta Rica\t2021-01-06\t763\nCosta Rica\t2021-01-07\t937\nCosta Rica\t2021-01-08\t1111\nCosta Rica\t2021-01-09\t1385\nCosta Rica\t2021-01-10\t1659\nCosta Rica\t2021-01-11\t1759\nCosta Rica\t2021-01-12\t1859\nCosta Rica\t2021-01-13\t1959\nCosta Rica\t2021-01-14\t2058\nCosta Rica\t2021-01-15\t2158\nCosta Rica\t2021-01-16\t2066\nCosta Rica\t2021-01-17\t1973\nCosta Rica\t2021-01-18\t1880\nCosta Rica\t2021-01-19\t1955\nCosta Rica\t2021-01-20\t2029\nCosta Rica\t2021-01-21\t2103\nCosta Rica\t2021-01-22\t2177\nCosta Rica\t2021-01-23\t2344\nCosta Rica\t2021-01-24\t2510\nCosta Rica\t2021-01-25\t2677\nCosta Rica\t2021-01-26\t2490\nCosta Rica\t2021-01-27\t2303\nCosta Rica\t2021-01-28\t2116\nCosta Rica\t2021-01-29\t1929\nCosta Rica\t2021-01-30\t1742\nCosta Rica\t2021-01-31\t1555\nCosta Rica\t2021-02-01\t1368\nCroatia\t2020-12-31\t1105\nCroatia\t2021-01-01\t1105\nCroatia\t2021-01-02\t1105\nCroatia\t2021-01-03\t1105\nCroatia\t2021-01-04\t1036\nCroatia\t2021-01-05\t989\nCroatia\t2021-01-06\t1334\nCroatia\t2021-01-07\t1662\nCroatia\t2021-01-08\t2130\nCroatia\t2021-01-09\t2689\nCroatia\t2021-01-10\t2693\nCroatia\t2021-01-11\t2748\nCroatia\t2021-01-12\t2802\nCroatia\t2021-01-13\t2479\nCroatia\t2021-01-14\t2485\nCroatia\t2021-01-15\t2364\nCroatia\t2021-01-16\t2272\nCroatia\t2021-01-17\t2510\nCroatia\t2021-01-18\t2747\nCroatia\t2021-01-19\t2984\nCroatia\t2021-01-20\t3329\nCroatia\t2021-01-21\t3343\nCroatia\t2021-01-22\t3346\nCroatia\t2021-01-23\t2960\nCroatia\t2021-01-24\t2800\nCroatia\t2021-01-25\t2640\nCroatia\t2021-01-26\t2598\nCroatia\t2021-01-27\t2448\nCroatia\t2021-01-28\t2299\nCroatia\t2021-01-29\t2150\nCroatia\t2021-01-30\t2097\nCroatia\t2021-01-31\t2045\nCroatia\t2021-02-01\t1992\nCyprus\t2021-01-07\t534\nCyprus\t2021-01-08\t534\nCyprus\t2021-01-09\t534\nCyprus\t2021-01-10\t534\nCyprus\t2021-01-11\t594\nCyprus\t2021-01-12\t635\nCyprus\t2021-01-13\t664\nCyprus\t2021-01-14\t708\nCyprus\t2021-01-15\t751\nCyprus\t2021-01-16\t821\nCyprus\t2021-01-17\t891\nCyprus\t2021-01-18\t917\nCyprus\t2021-01-19\t943\nCyprus\t2021-01-20\t969\nCyprus\t2021-01-21\t996\nCyprus\t2021-01-22\t1022\nCyprus\t2021-01-23\t1035\nCyprus\t2021-01-24\t1048\nCyprus\t2021-01-25\t1061\nCyprus\t2021-01-26\t1074\nCyprus\t2021-01-27\t1087\nCyprus\t2021-01-28\t1100\nCyprus\t2021-01-29\t1113\nCzechia\t2020-12-28\t2283\nCzechia\t2020-12-29\t2861\nCzechia\t2020-12-30\t3062\nCzechia\t2020-12-31\t2622\nCzechia\t2021-01-01\t2150\nCzechia\t2021-01-02\t2001\nCzechia\t2021-01-03\t1846\nCzechia\t2021-01-04\t2029\nCzechia\t2021-01-05\t2181\nCzechia\t2021-01-06\t2515\nCzechia\t2021-01-07\t3457\nCzechia\t2021-01-08\t4834\nCzechia\t2021-01-09\t4938\nCzechia\t2021-01-10\t5051\nCzechia\t2021-01-11\t5926\nCzechia\t2021-01-12\t7179\nCzechia\t2021-01-13\t8249\nCzechia\t2021-01-14\t9215\nCzechia\t2021-01-15\t9717\nCzechia\t2021-01-16\t9904\nCzechia\t2021-01-17\t10094\nCzechia\t2021-01-18\t10662\nCzechia\t2021-01-19\t10860\nCzechia\t2021-01-20\t11153\nCzechia\t2021-01-21\t11402\nCzechia\t2021-01-22\t11667\nCzechia\t2021-01-23\t11718\nCzechia\t2021-01-24\t11713\nCzechia\t2021-01-25\t11511\nCzechia\t2021-01-26\t11435\nCzechia\t2021-01-27\t11120\nCzechia\t2021-01-28\t10615\nCzechia\t2021-01-29\t10361\nCzechia\t2021-01-30\t10081\nCzechia\t2021-01-31\t9910\nCzechia\t2021-02-01\t9705\nCzechia\t2021-02-02\t9447\nDenmark\t2020-12-28\t1998\nDenmark\t2020-12-29\t5558\nDenmark\t2020-12-30\t7584\nDenmark\t2020-12-31\t7272\nDenmark\t2021-01-01\t6295\nDenmark\t2021-01-02\t6751\nDenmark\t2021-01-03\t6660\nDenmark\t2021-01-04\t6725\nDenmark\t2021-01-05\t7383\nDenmark\t2021-01-06\t8593\nDenmark\t2021-01-07\t10226\nDenmark\t2021-01-08\t11109\nDenmark\t2021-01-09\t10091\nDenmark\t2021-01-10\t9333\nDenmark\t2021-01-11\t9077\nDenmark\t2021-01-12\t7182\nDenmark\t2021-01-13\t6120\nDenmark\t2021-01-14\t6136\nDenmark\t2021-01-15\t7083\nDenmark\t2021-01-16\t7468\nDenmark\t2021-01-17\t7818\nDenmark\t2021-01-18\t8586\nDenmark\t2021-01-19\t9180\nDenmark\t2021-01-20\t7860\nDenmark\t2021-01-21\t5860\nDenmark\t2021-01-22\t4601\nDenmark\t2021-01-23\t5074\nDenmark\t2021-01-24\t5635\nDenmark\t2021-01-25\t5162\nDenmark\t2021-01-26\t4781\nDenmark\t2021-01-27\t4951\nDenmark\t2021-01-28\t5578\nDenmark\t2021-01-29\t7306\nDenmark\t2021-01-30\t8110\nDenmark\t2021-01-31\t8902\nDenmark\t2021-02-01\t9629\nEcuador\t2021-01-22\t108\nEcuador\t2021-01-23\t294\nEcuador\t2021-01-24\t355\nEcuador\t2021-01-25\t386\nEcuador\t2021-01-26\t405\nEcuador\t2021-01-27\t417\nEcuador\t2021-01-28\t426\nEgypt\t2021-01-25\t219\nEgypt\t2021-01-26\t219\nEgypt\t2021-01-27\t219\nEgypt\t2021-01-28\t219\nEgypt\t2021-01-29\t219\nEgypt\t2021-01-30\t219\nEngland\t2020-12-21\t37897\nEngland\t2020-12-22\t37897\nEngland\t2020-12-23\t37897\nEngland\t2020-12-24\t37897\nEngland\t2020-12-25\t37897\nEngland\t2020-12-26\t37897\nEngland\t2020-12-27\t37897\nEngland\t2020-12-28\t39559\nEngland\t2020-12-29\t41221\nEngland\t2020-12-30\t42884\nEngland\t2020-12-31\t44546\nEngland\t2021-01-01\t46209\nEngland\t2021-01-02\t47871\nEngland\t2021-01-03\t49533\nEngland\t2021-01-04\t65958\nEngland\t2021-01-05\t82383\nEngland\t2021-01-06\t98808\nEngland\t2021-01-07\t115233\nEngland\t2021-01-08\t131658\nEngland\t2021-01-09\t148083\nEngland\t2021-01-10\t164508\nEngland\t2021-01-11\t161070\nEngland\t2021-01-12\t164375\nEngland\t2021-01-13\t176328\nEngland\t2021-01-14\t192776\nEngland\t2021-01-15\t215662\nEngland\t2021-01-16\t231763\nEngland\t2021-01-17\t230525\nEngland\t2021-01-18\t234877\nEngland\t2021-01-19\t251122\nEngland\t2021-01-20\t261507\nEngland\t2021-01-21\t272972\nEngland\t2021-01-22\t287384\nEngland\t2021-01-23\t311226\nEngland\t2021-01-24\t317419\nEngland\t2021-01-25\t326745\nEngland\t2021-01-26\t320880\nEngland\t2021-01-27\t311182\nEngland\t2021-01-28\t308977\nEngland\t2021-01-29\t310733\nEngland\t2021-01-30\t325853\nEngland\t2021-01-31\t339126\nEngland\t2021-02-01\t345688\nEstonia\t2020-12-29\t309\nEstonia\t2020-12-30\t338\nEstonia\t2020-12-31\t567\nEstonia\t2021-01-01\t570\nEstonia\t2021-01-02\t459\nEstonia\t2021-01-03\t385\nEstonia\t2021-01-04\t333\nEstonia\t2021-01-05\t382\nEstonia\t2021-01-06\t589\nEstonia\t2021-01-07\t675\nEstonia\t2021-01-08\t784\nEstonia\t2021-01-09\t1099\nEstonia\t2021-01-10\t1176\nEstonia\t2021-01-11\t1205\nEstonia\t2021-01-12\t1244\nEstonia\t2021-01-13\t1210\nEstonia\t2021-01-14\t1178\nEstonia\t2021-01-15\t1243\nEstonia\t2021-01-16\t1109\nEstonia\t2021-01-17\t1061\nEstonia\t2021-01-18\t1043\nEstonia\t2021-01-19\t1060\nEstonia\t2021-01-20\t1000\nEstonia\t2021-01-21\t1015\nEstonia\t2021-01-22\t1074\nEstonia\t2021-01-23\t1106\nEstonia\t2021-01-24\t1112\nEstonia\t2021-01-25\t1122\nEstonia\t2021-01-26\t1124\nEstonia\t2021-01-27\t1302\nEstonia\t2021-01-28\t1378\nEstonia\t2021-01-29\t1403\nEstonia\t2021-01-30\t1647\nEstonia\t2021-01-31\t1727\nEstonia\t2021-02-01\t1781\nEstonia\t2021-02-02\t1862\nEuropean Union\t2020-12-28\t39491\nEuropean Union\t2020-12-29\t60548\nEuropean Union\t2020-12-30\t86222\nEuropean Union\t2020-12-31\t88009\nEuropean Union\t2021-01-01\t78487\nEuropean Union\t2021-01-02\t82689\nEuropean Union\t2021-01-03\t84541\nEuropean Union\t2021-01-04\t118449\nEuropean Union\t2021-01-05\t149176\nEuropean Union\t2021-01-06\t165680\nEuropean Union\t2021-01-07\t208251\nEuropean Union\t2021-01-08\t257767\nEuropean Union\t2021-01-09\t270025\nEuropean Union\t2021-01-10\t286755\nEuropean Union\t2021-01-11\t308838\nEuropean Union\t2021-01-12\t329693\nEuropean Union\t2021-01-13\t373041\nEuropean Union\t2021-01-14\t392744\nEuropean Union\t2021-01-15\t414279\nEuropean Union\t2021-01-16\t417859\nEuropean Union\t2021-01-17\t421291\nEuropean Union\t2021-01-18\t424649\nEuropean Union\t2021-01-19\t429941\nEuropean Union\t2021-01-20\t433221\nEuropean Union\t2021-01-21\t438312\nEuropean Union\t2021-01-22\t456082\nEuropean Union\t2021-01-23\t466685\nEuropean Union\t2021-01-24\t484029\nEuropean Union\t2021-01-25\t488805\nEuropean Union\t2021-01-26\t510687\nEuropean Union\t2021-01-27\t514971\nEuropean Union\t2021-01-28\t536114\nEuropean Union\t2021-01-29\t526129\nEuropean Union\t2021-01-30\t534487\nEuropean Union\t2021-01-31\t542753\nEuropean Union\t2021-02-01\t552943\nEuropean Union\t2021-02-02\t493372\nFinland\t2021-01-01\t459\nFinland\t2021-01-02\t459\nFinland\t2021-01-03\t459\nFinland\t2021-01-04\t459\nFinland\t2021-01-05\t736\nFinland\t2021-01-06\t839\nFinland\t2021-01-07\t913\nFinland\t2021-01-08\t1273\nFinland\t2021-01-09\t1353\nFinland\t2021-01-10\t1433\nFinland\t2021-01-11\t1513\nFinland\t2021-01-12\t1739\nFinland\t2021-01-13\t2332\nFinland\t2021-01-14\t3554\nFinland\t2021-01-15\t4573\nFinland\t2021-01-16\t4971\nFinland\t2021-01-17\t5369\nFinland\t2021-01-18\t5767\nFinland\t2021-01-19\t5458\nFinland\t2021-01-20\t5562\nFinland\t2021-01-21\t6467\nFinland\t2021-01-22\t6874\nFinland\t2021-01-23\t7253\nFinland\t2021-01-24\t7633\nFinland\t2021-01-25\t8012\nFinland\t2021-01-26\t8740\nFinland\t2021-01-27\t9264\nFinland\t2021-01-28\t8575\nFinland\t2021-01-29\t8647\nFinland\t2021-01-30\t9222\nFinland\t2021-01-31\t8404\nFinland\t2021-02-01\t7587\nFinland\t2021-02-02\t6709\nFrance\t2020-12-28\t39\nFrance\t2020-12-29\t62\nFrance\t2020-12-30\t75\nFrance\t2020-12-31\t76\nFrance\t2021-01-01\t62\nFrance\t2021-01-02\t59\nFrance\t2021-01-03\t61\nFrance\t2021-01-04\t250\nFrance\t2021-01-05\t944\nFrance\t2021-01-06\t2404\nFrance\t2021-01-07\t6138\nFrance\t2021-01-08\t10814\nFrance\t2021-01-09\t12278\nFrance\t2021-01-10\t13027\nFrance\t2021-01-11\t17659\nFrance\t2021-01-12\t24625\nFrance\t2021-01-13\t31246\nFrance\t2021-01-14\t37561\nFrance\t2021-01-15\t41261\nFrance\t2021-01-16\t42287\nFrance\t2021-01-17\t42897\nFrance\t2021-01-18\t48952\nFrance\t2021-01-19\t58088\nFrance\t2021-01-20\t67598\nFrance\t2021-01-21\t77739\nFrance\t2021-01-22\t84981\nFrance\t2021-01-23\t87546\nFrance\t2021-01-24\t87437\nFrance\t2021-01-25\t86710\nFrance\t2021-01-26\t83647\nFrance\t2021-01-27\t80820\nFrance\t2021-01-28\t78072\nFrance\t2021-01-29\t76418\nFrance\t2021-01-30\t75747\nFrance\t2021-01-31\t75666\nFrance\t2021-02-01\t76290\nGermany\t2020-12-28\t19834\nGermany\t2020-12-29\t31540\nGermany\t2020-12-30\t40237\nGermany\t2020-12-31\t39693\nGermany\t2021-01-01\t36647\nGermany\t2021-01-02\t38967\nGermany\t2021-01-03\t36969\nGermany\t2021-01-04\t41097\nGermany\t2021-01-05\t42356\nGermany\t2021-01-06\t42467\nGermany\t2021-01-07\t45401\nGermany\t2021-01-08\t50402\nGermany\t2021-01-09\t51249\nGermany\t2021-01-10\t52426\nGermany\t2021-01-11\t54817\nGermany\t2021-01-12\t59072\nGermany\t2021-01-13\t64751\nGermany\t2021-01-14\t70733\nGermany\t2021-01-15\t75495\nGermany\t2021-01-16\t75552\nGermany\t2021-01-17\t77170\nGermany\t2021-01-18\t78376\nGermany\t2021-01-19\t80021\nGermany\t2021-01-20\t84099\nGermany\t2021-01-21\t83160\nGermany\t2021-01-22\t86092\nGermany\t2021-01-23\t90863\nGermany\t2021-01-24\t93841\nGermany\t2021-01-25\t96996\nGermany\t2021-01-26\t98023\nGermany\t2021-01-27\t95424\nGermany\t2021-01-28\t96060\nGermany\t2021-01-29\t94595\nGermany\t2021-01-30\t92327\nGermany\t2021-01-31\t91481\nGermany\t2021-02-01\t92043\nGibraltar\t2021-01-11\t1025\nGibraltar\t2021-01-12\t1040\nGibraltar\t2021-01-13\t986\nGibraltar\t2021-01-14\t959\nGibraltar\t2021-01-15\t943\nGibraltar\t2021-01-16\t904\nGibraltar\t2021-01-17\t775\nGibraltar\t2021-01-18\t713\nGibraltar\t2021-01-19\t645\nGibraltar\t2021-01-20\t520\nGibraltar\t2021-01-21\t527\nGibraltar\t2021-01-22\t535\nGibraltar\t2021-01-23\t566\nGibraltar\t2021-01-24\t642\nGibraltar\t2021-01-25\t586\nGibraltar\t2021-01-26\t579\nGibraltar\t2021-01-27\t656\nGibraltar\t2021-01-28\t626\nGibraltar\t2021-01-29\t570\nGibraltar\t2021-01-30\t437\nGibraltar\t2021-01-31\t421\nGibraltar\t2021-02-01\t537\nGreece\t2020-12-29\t670\nGreece\t2020-12-30\t662\nGreece\t2020-12-31\t642\nGreece\t2021-01-01\t551\nGreece\t2021-01-02\t549\nGreece\t2021-01-03\t576\nGreece\t2021-01-04\t1370\nGreece\t2021-01-05\t2168\nGreece\t2021-01-06\t2680\nGreece\t2021-01-07\t3385\nGreece\t2021-01-08\t4599\nGreece\t2021-01-09\t5290\nGreece\t2021-01-10\t5748\nGreece\t2021-01-11\t5667\nGreece\t2021-01-12\t5709\nGreece\t2021-01-13\t6308\nGreece\t2021-01-14\t6384\nGreece\t2021-01-15\t5784\nGreece\t2021-01-16\t5654\nGreece\t2021-01-17\t5486\nGreece\t2021-01-18\t5083\nGreece\t2021-01-19\t5283\nGreece\t2021-01-20\t6102\nGreece\t2021-01-21\t7522\nGreece\t2021-01-22\t9371\nGreece\t2021-01-23\t11092\nGreece\t2021-01-24\t12128\nGreece\t2021-01-25\t13165\nGreece\t2021-01-26\t14658\nGreece\t2021-01-27\t15200\nGreece\t2021-01-28\t15532\nGreece\t2021-01-29\t15776\nGreece\t2021-01-30\t15960\nGreece\t2021-01-31\t16092\nGreece\t2021-02-01\t16224\nGreece\t2021-02-02\t17125\nHungary\t2020-12-29\t1367\nHungary\t2020-12-30\t1348\nHungary\t2020-12-31\t1339\nHungary\t2021-01-01\t1578\nHungary\t2021-01-02\t1722\nHungary\t2021-01-03\t1818\nHungary\t2021-01-04\t1987\nHungary\t2021-01-05\t2648\nHungary\t2021-01-06\t3959\nHungary\t2021-01-07\t5348\nHungary\t2021-01-08\t6375\nHungary\t2021-01-09\t7402\nHungary\t2021-01-10\t8429\nHungary\t2021-01-11\t9083\nHungary\t2021-01-12\t9418\nHungary\t2021-01-13\t9229\nHungary\t2021-01-14\t9026\nHungary\t2021-01-15\t8688\nHungary\t2021-01-16\t8347\nHungary\t2021-01-17\t7455\nHungary\t2021-01-18\t7536\nHungary\t2021-01-19\t6618\nHungary\t2021-01-20\t6069\nHungary\t2021-01-21\t5581\nHungary\t2021-01-22\t5326\nHungary\t2021-01-23\t4778\nHungary\t2021-01-24\t4701\nHungary\t2021-01-25\t4426\nHungary\t2021-01-26\t5317\nHungary\t2021-01-27\t6989\nHungary\t2021-01-28\t9745\nHungary\t2021-01-29\t13966\nHungary\t2021-01-30\t17920\nHungary\t2021-01-31\t20434\nHungary\t2021-02-01\t21335\nIceland\t2020-12-31\t63\nIceland\t2021-01-01\t63\nIceland\t2021-01-02\t63\nIceland\t2021-01-03\t63\nIceland\t2021-01-04\t63\nIceland\t2021-01-05\t63\nIceland\t2021-01-06\t63\nIceland\t2021-01-07\t63\nIceland\t2021-01-08\t63\nIceland\t2021-01-09\t63\nIceland\t2021-01-10\t63\nIceland\t2021-01-11\t63\nIceland\t2021-01-12\t63\nIceland\t2021-01-13\t63\nIceland\t2021-01-14\t63\nIceland\t2021-01-15\t63\nIceland\t2021-01-16\t63\nIceland\t2021-01-17\t63\nIceland\t2021-01-18\t63\nIceland\t2021-01-19\t63\nIceland\t2021-01-20\t63\nIceland\t2021-01-21\t312\nIceland\t2021-01-22\t560\nIceland\t2021-01-23\t809\nIceland\t2021-01-24\t1057\nIceland\t2021-01-25\t1306\nIceland\t2021-01-26\t1318\nIceland\t2021-01-27\t1331\nIndia\t2021-01-16\t191181\nIndia\t2021-01-17\t112150\nIndia\t2021-01-18\t151350\nIndia\t2021-01-19\t168709\nIndia\t2021-01-20\t161297\nIndia\t2021-01-21\t173922\nIndia\t2021-01-22\t198656\nIndia\t2021-01-23\t198717\nIndia\t2021-01-24\t198743\nIndia\t2021-01-25\t224251\nIndia\t2021-01-26\t193521\nIndia\t2021-01-27\t221356\nIndia\t2021-01-28\t269217\nIndia\t2021-01-29\t301348\nIndia\t2021-01-30\t308876\nIndia\t2021-01-31\t306191\nIndia\t2021-02-01\t275192\nIndia\t2021-02-02\t301348\nIndonesia\t2021-01-13\t13200\nIndonesia\t2021-01-14\t13200\nIndonesia\t2021-01-15\t13200\nIndonesia\t2021-01-16\t13200\nIndonesia\t2021-01-17\t13200\nIndonesia\t2021-01-18\t13200\nIndonesia\t2021-01-19\t13200\nIndonesia\t2021-01-20\t13200\nIndonesia\t2021-01-21\t13200\nIndonesia\t2021-01-22\t13200\nIndonesia\t2021-01-23\t12546\nIndonesia\t2021-01-24\t11892\nIndonesia\t2021-01-25\t11823\nIndonesia\t2021-01-26\t21898\nIndonesia\t2021-01-27\t28915\nIndonesia\t2021-01-28\t36427\nIndonesia\t2021-01-29\t40614\nIndonesia\t2021-01-30\t51762\nIndonesia\t2021-01-31\t52348\nIndonesia\t2021-02-01\t58997\nIndonesia\t2021-02-02\t57511\nIreland\t2021-01-01\t550\nIreland\t2021-01-02\t550\nIreland\t2021-01-03\t550\nIreland\t2021-01-04\t550\nIreland\t2021-01-05\t1194\nIreland\t2021-01-06\t1624\nIreland\t2021-01-07\t1931\nIreland\t2021-01-08\t3028\nIreland\t2021-01-09\t4124\nIreland\t2021-01-10\t5221\nIreland\t2021-01-11\t6919\nIreland\t2021-01-12\t8157\nIreland\t2021-01-13\t9394\nIreland\t2021-01-14\t9452\nIreland\t2021-01-15\t8873\nIreland\t2021-01-16\t8293\nIreland\t2021-01-17\t7714\nIreland\t2021-01-18\t7267\nIreland\t2021-01-19\t6819\nIreland\t2021-01-20\t6371\nIreland\t2021-01-21\t6528\nIreland\t2021-01-22\t6686\nIreland\t2021-01-23\t6843\nIreland\t2021-01-24\t7000\nIreland\t2021-01-25\t6552\nIreland\t2021-01-26\t6105\nIreland\t2021-01-27\t5657\nIreland\t2021-01-28\t6271\nIreland\t2021-01-29\t6886\nIreland\t2021-01-30\t7500\nIreland\t2021-01-31\t8114\nIsle of Man\t2021-01-22\t90\nIsle of Man\t2021-01-23\t138\nIsle of Man\t2021-01-24\t155\nIsle of Man\t2021-01-25\t163\nIsle of Man\t2021-01-26\t266\nIsle of Man\t2021-01-27\t338\nIsle of Man\t2021-01-28\t389\nIsle of Man\t2021-01-29\t459\nIsle of Man\t2021-01-30\t484\nIsle of Man\t2021-01-31\t517\nIsle of Man\t2021-02-01\t555\nIsle of Man\t2021-02-02\t488\nIsrael\t2020-12-20\t7311\nIsrael\t2020-12-21\t16034\nIsrael\t2020-12-22\t25443\nIsrael\t2020-12-23\t34507\nIsrael\t2020-12-24\t42045\nIsrael\t2020-12-25\t41329\nIsrael\t2020-12-26\t40001\nIsrael\t2020-12-27\t53712\nIsrael\t2020-12-28\t69129\nIsrael\t2020-12-29\t84788\nIsrael\t2020-12-30\t97457\nIsrael\t2020-12-31\t109485\nIsrael\t2021-01-01\t114167\nIsrael\t2021-01-02\t119725\nIsrael\t2021-01-03\t125919\nIsrael\t2021-01-04\t126916\nIsrael\t2021-01-05\t122501\nIsrael\t2021-01-06\t115411\nIsrael\t2021-01-07\t109317\nIsrael\t2021-01-08\t108575\nIsrael\t2021-01-09\t104721\nIsrael\t2021-01-10\t89892\nIsrael\t2021-01-11\t75561\nIsrael\t2021-01-12\t66385\nIsrael\t2021-01-13\t67225\nIsrael\t2021-01-14\t68539\nIsrael\t2021-01-15\t68564\nIsrael\t2021-01-16\t70087\nIsrael\t2021-01-17\t85442\nIsrael\t2021-01-18\t106467\nIsrael\t2021-01-19\t127644\nIsrael\t2021-01-20\t143332\nIsrael\t2021-01-21\t158567\nIsrael\t2021-01-22\t164631\nIsrael\t2021-01-23\t170088\nIsrael\t2021-01-24\t178087\nIsrael\t2021-01-25\t182518\nIsrael\t2021-01-26\t181552\nIsrael\t2021-01-27\t179317\nIsrael\t2021-01-28\t176309\nIsrael\t2021-01-29\t175267\nIsrael\t2021-01-30\t172958\nIsrael\t2021-01-31\t162332\nIsrael\t2021-02-01\t147942\nIsrael\t2021-02-02\t133637\nItaly\t2020-12-28\t948\nItaly\t2020-12-29\t927\nItaly\t2020-12-30\t2150\nItaly\t2020-12-31\t7892\nItaly\t2021-01-01\t8496\nItaly\t2021-01-02\t13395\nItaly\t2021-01-03\t16456\nItaly\t2021-01-04\t25983\nItaly\t2021-01-05\t37100\nItaly\t2021-01-06\t45692\nItaly\t2021-01-07\t55119\nItaly\t2021-01-08\t67066\nItaly\t2021-01-09\t73988\nItaly\t2021-01-10\t77596\nItaly\t2021-01-11\t79381\nItaly\t2021-01-12\t79596\nItaly\t2021-01-13\t83512\nItaly\t2021-01-14\t83505\nItaly\t2021-01-15\t82427\nItaly\t2021-01-16\t79074\nItaly\t2021-01-17\t75596\nItaly\t2021-01-18\t70002\nItaly\t2021-01-19\t63028\nItaly\t2021-01-20\t54002\nItaly\t2021-01-21\t45861\nItaly\t2021-01-22\t37048\nItaly\t2021-01-23\t33507\nItaly\t2021-01-24\t33187\nItaly\t2021-01-25\t37044\nItaly\t2021-01-26\t43855\nItaly\t2021-01-27\t49650\nItaly\t2021-01-28\t57896\nItaly\t2021-01-29\t67859\nItaly\t2021-01-30\t74773\nItaly\t2021-01-31\t78278\nItaly\t2021-02-01\t79917\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"result-alert alert-warning\" role\u003d\"alert\"\u003e\u003cbutton type\u003d\"button\" class\u003d\"close\" data-dismiss\u003d\"alert\" aria-label\u003d\"Close\"\u003e\u003cspan aria-hidden\u003d\"true\"\u003e\u0026times;\u003c/span\u003e\u003c/button\u003e\u003cstrong\u003eOutput is truncated\u003c/strong\u003e to 1000 rows. Learn more about \u003cstrong\u003ezeppelin.spark.maxResult\u003c/strong\u003e\u003c/div\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://dd7733ed78eb:4040/jobs/job?id\u003d66"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612707626564_20979669",
+      "id": "paragraph_1612707626564_20979669",
+      "dateCreated": "2021-02-07 14:20:26.564",
+      "dateStarted": "2021-02-07 16:36:07.655",
+      "dateFinished": "2021-02-07 16:36:08.151",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import sqlContext.implicits._\nval df2 \u003d Seq(\n  (java.sql.Date.valueOf(\"2010-01-01\"),1),\n  (java.sql.Date.valueOf(\"2010-02-01\"),2)\n).toDF(\"datess\", \"ints\").createOrReplaceTempView(\"test2\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:30:03.897",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import sqlContext.implicits._\n\u001b[1m\u001b[34mdf2\u001b[0m: \u001b[1m\u001b[32mUnit\u001b[0m \u003d ()\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612707766928_639267161",
+      "id": "paragraph_1612707766928_639267161",
+      "dateCreated": "2021-02-07 14:22:46.929",
+      "dateStarted": "2021-02-07 16:30:03.952",
+      "dateFinished": "2021-02-07 16:30:05.872",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%sql\nselect * from test2",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:30:29.877",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300.0,
+              "optionOpen": true,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "int_column": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "datess",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "ints",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "datess\tints\n2010-01-01\t1\n2010-02-01\t2\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612715046749_883778382",
+      "id": "paragraph_1612715046749_883778382",
+      "dateCreated": "2021-02-07 16:24:06.776",
+      "dateStarted": "2021-02-07 16:30:06.388",
+      "dateFinished": "2021-02-07 16:30:06.487",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-07 16:26:00.235",
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612715160235_1944178717",
+      "id": "paragraph_1612715160235_1944178717",
+      "dateCreated": "2021-02-07 16:26:00.235",
+      "status": "READY"
+    }
+  ],
+  "name": "Spark",
+  "id": "2FXUESBPX",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview2",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {
+    "isRunning": false
+  }
+}
