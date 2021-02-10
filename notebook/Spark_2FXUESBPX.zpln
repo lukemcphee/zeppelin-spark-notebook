@@ -324,9 +324,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "val filterList \u003d Seq(\"World\", \"United Kingdom\", \"France\")\nval filtered \u003d vaccinations\n                    .filter(\n                        col(\"location\").isin(filterList : _*)\n                        )\n                    .sort(\"location\", \"date\")\nfiltered.createOrReplaceTempView(\"filtered\")\n",
+      "text": "val filterList \u003d Seq(\"World\", \"United Kingdom\", \"France\")\nval filtered \u003d vaccinations\n                    .filter(col(\"location\").isin(filterList : _*))\n                    .sort(\"location\", \"date\")\nfiltered.createOrReplaceTempView(\"filtered\")\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-07 18:13:41.286",
+      "dateUpdated": "2021-02-07 18:38:33.968",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -614,23 +614,6 @@
       "dateStarted": "2021-02-07 18:13:46.939",
       "dateFinished": "2021-02-07 18:13:47.934",
       "status": "FINISHED"
-    },
-    {
-      "text": "%spark.sql\n",
-      "user": "anonymous",
-      "dateUpdated": "2021-02-07 17:23:37.291",
-      "config": {},
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1612718617291_228265531",
-      "id": "paragraph_1612718617291_228265531",
-      "dateCreated": "2021-02-07 17:23:37.291",
-      "status": "READY"
     }
   ],
   "name": "Spark",
