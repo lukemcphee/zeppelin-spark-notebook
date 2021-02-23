@@ -1,0 +1,664 @@
+{
+  "paragraphs": [
+    {
+      "text": "val hello \u003d \"hello world\"\nprintln(hello)",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-18 18:42:58.360",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala",
+        "tableHide": false
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "hello world\n\u001b[1m\u001b[34mhello\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d hello world\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612622335709_1646379887",
+      "id": "paragraph_1612622335709_1646379887",
+      "dateCreated": "2021-02-06 14:38:55.709",
+      "dateStarted": "2021-02-18 18:42:59.039",
+      "dateFinished": "2021-02-18 18:43:01.060",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.sql.SparkSession\n\nval spark \u003d SparkSession.builder.config(sc.getConf).getOrCreate()",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-18 18:43:01.174",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.sql.SparkSession\n\u001b[1m\u001b[34mspark\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m \u003d org.apache.spark.sql.SparkSession@43ad8293\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612622440954_663230290",
+      "id": "paragraph_1612622440954_663230290",
+      "dateCreated": "2021-02-06 14:40:40.955",
+      "dateStarted": "2021-02-18 18:43:01.831",
+      "dateFinished": "2021-02-18 18:43:04.222",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val df \u003d spark.read\n         .format(\"csv\")\n         .option(\"header\", \"true\") // first line in file is our headers\n         .option(\"mode\", \"DROPMALFORMED\")\n         .option(\"inferSchema\", \"true\") // allows us to access the underlying types, super helpful\n         .load(\"/notebook/vaccinations.csv\")\n         \ndf.printSchema",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-18 19:16:18.835",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- location: string (nullable \u003d true)\n |-- iso_code: string (nullable \u003d true)\n |-- date: timestamp (nullable \u003d true)\n |-- total_vaccinations: integer (nullable \u003d true)\n |-- people_vaccinated: integer (nullable \u003d true)\n |-- people_fully_vaccinated: integer (nullable \u003d true)\n |-- daily_vaccinations_raw: integer (nullable \u003d true)\n |-- daily_vaccinations: integer (nullable \u003d true)\n |-- total_vaccinations_per_hundred: double (nullable \u003d true)\n |-- people_vaccinated_per_hundred: double (nullable \u003d true)\n |-- people_fully_vaccinated_per_hundred: double (nullable \u003d true)\n |-- daily_vaccinations_per_million: integer (nullable \u003d true)\n\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [location: string, iso_code: string ... 10 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d6"
+            },
+            {
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d7"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612622859146_2694864",
+      "id": "paragraph_1612622859146_2694864",
+      "dateCreated": "2021-02-06 14:47:39.146",
+      "dateStarted": "2021-02-18 19:16:18.888",
+      "dateFinished": "2021-02-18 19:16:21.665",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val totalVaccinations \u003d df\n    .groupBy(\"location\")\n    .sum(\"daily_vaccinations\")\n    .sort(desc(\"sum(daily_vaccinations)\")) \n\n// alternatively if we want to use named fields we could do this\ndf.groupBy(\"location\")\n    .agg(sum(\"daily_vaccinations\") as \"vaccinationsSum\")\n    .sort(desc(\"vaccinationsSum\")) \n\ntotalVaccinations.show(10)",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-22 21:22:09.696",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------+-----------------------+\n|      location|sum(daily_vaccinations)|\n+--------------+-----------------------+\n|         World|               93141451|\n| United States|               29051988|\n|         China|               21794325|\n|European Union|               12467015|\n|United Kingdom|                8359454|\n|       England|                7281923|\n|        Israel|                4820836|\n|         India|                3956025|\n|        Turkey|                2657608|\n|       Germany|                2400276|\n+--------------+-----------------------+\nonly showing top 10 rows\n\n\u001b[1m\u001b[34mtotalVaccinations\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [location: string, sum(daily_vaccinations): bigint]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d25"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612623232734_733436876",
+      "id": "paragraph_1612623232734_733436876",
+      "dateCreated": "2021-02-06 14:53:52.734",
+      "dateStarted": "2021-02-22 21:22:09.756",
+      "dateFinished": "2021-02-22 21:22:13.580",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val vaccinations \u003d df.select(\"location\", \"date\", \"total_vaccinations\")\n        .withColumn(\"date\", to_date(col(\"date\"),\"yyyy-MM-dd\")) // convert our dates into a more usable format\n        .sort(\"date\")\n        .sort(\"location\")\nvaccinations.createOrReplaceTempView(\"vaccinations\") \n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-22 20:53:00.137",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mvaccinations\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [location: string, date: date ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612712267092_830189056",
+      "id": "paragraph_1612712267092_830189056",
+      "dateCreated": "2021-02-07 15:37:47.094",
+      "dateStarted": "2021-02-22 20:15:30.699",
+      "dateFinished": "2021-02-22 20:15:32.135",
+      "status": "FINISHED"
+    },
+    {
+      "text": "vaccinations\n    .filter(col(\"location\") \u003d\u003d\u003d \"United States\" ||  col(\"location\") \u003d\u003d\u003d \"United Kingdom\").sort(\"location\", \"date\")\n    .show(100)\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-22 20:37:17.990",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+--------------+----------+------------------+\n|      location|      date|total_vaccinations|\n+--------------+----------+------------------+\n|United Kingdom|2020-12-20|            669674|\n|United Kingdom|2020-12-21|              null|\n|United Kingdom|2020-12-22|              null|\n|United Kingdom|2020-12-23|              null|\n|United Kingdom|2020-12-24|              null|\n|United Kingdom|2020-12-25|              null|\n|United Kingdom|2020-12-26|              null|\n|United Kingdom|2020-12-27|            996616|\n|United Kingdom|2020-12-28|              null|\n|United Kingdom|2020-12-29|              null|\n|United Kingdom|2020-12-30|              null|\n|United Kingdom|2020-12-31|              null|\n|United Kingdom|2021-01-01|              null|\n|United Kingdom|2021-01-02|              null|\n|United Kingdom|2021-01-03|           1389655|\n|United Kingdom|2021-01-04|              null|\n|United Kingdom|2021-01-05|              null|\n|United Kingdom|2021-01-06|              null|\n|United Kingdom|2021-01-07|              null|\n|United Kingdom|2021-01-08|              null|\n|United Kingdom|2021-01-09|              null|\n|United Kingdom|2021-01-10|           2677971|\n|United Kingdom|2021-01-11|           2843815|\n|United Kingdom|2021-01-12|           3067541|\n|United Kingdom|2021-01-13|           3356229|\n|United Kingdom|2021-01-14|           3678180|\n|United Kingdom|2021-01-15|           4006440|\n|United Kingdom|2021-01-16|           4286830|\n|United Kingdom|2021-01-17|           4514802|\n|United Kingdom|2021-01-18|           4723443|\n|United Kingdom|2021-01-19|           5070365|\n|United Kingdom|2021-01-20|           5437284|\n|United Kingdom|2021-01-21|           5849899|\n|United Kingdom|2021-01-22|           6329968|\n|United Kingdom|2021-01-23|           6822981|\n|United Kingdom|2021-01-24|           7044048|\n|United Kingdom|2021-01-25|           7325773|\n|United Kingdom|2021-01-26|           7638543|\n|United Kingdom|2021-01-27|           7953250|\n|United Kingdom|2021-01-28|           8369438|\n|United Kingdom|2021-01-29|           8859372|\n|United Kingdom|2021-01-30|           9468382|\n|United Kingdom|2021-01-31|           9790576|\n|United Kingdom|2021-02-01|          10143511|\n| United States|2020-12-20|            556208|\n| United States|2020-12-21|            614117|\n| United States|2020-12-22|              null|\n| United States|2020-12-23|           1008025|\n| United States|2020-12-24|              null|\n| United States|2020-12-25|              null|\n| United States|2020-12-26|           1944585|\n| United States|2020-12-27|              null|\n| United States|2020-12-28|           2127143|\n| United States|2020-12-29|              null|\n| United States|2020-12-30|           2794588|\n| United States|2020-12-31|              null|\n| United States|2021-01-01|              null|\n| United States|2021-01-02|           4225756|\n| United States|2021-01-03|              null|\n| United States|2021-01-04|           4563260|\n| United States|2021-01-05|           4836469|\n| United States|2021-01-06|           5306797|\n| United States|2021-01-07|           5919418|\n| United States|2021-01-08|           6688231|\n| United States|2021-01-09|              null|\n| United States|2021-01-10|              null|\n| United States|2021-01-11|           8987322|\n| United States|2021-01-12|           9327138|\n| United States|2021-01-13|          10278462|\n| United States|2021-01-14|          11148991|\n| United States|2021-01-15|          12279180|\n| United States|2021-01-16|              null|\n| United States|2021-01-17|              null|\n| United States|2021-01-18|              null|\n| United States|2021-01-19|          15707588|\n| United States|2021-01-20|          16525281|\n| United States|2021-01-21|          17546374|\n| United States|2021-01-22|          19107959|\n| United States|2021-01-23|          20537990|\n| United States|2021-01-24|          21848655|\n| United States|2021-01-25|          22734243|\n| United States|2021-01-26|          23540994|\n| United States|2021-01-27|          24652634|\n| United States|2021-01-28|          26193682|\n| United States|2021-01-29|          27884661|\n| United States|2021-01-30|          29577902|\n| United States|2021-01-31|          31123299|\n| United States|2021-02-01|          32222402|\n| United States|2021-02-02|          32780860|\n+--------------+----------+------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d23"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612623387009_347893629",
+      "id": "paragraph_1612623387009_347893629",
+      "dateCreated": "2021-02-06 14:56:27.023",
+      "dateStarted": "2021-02-22 20:37:18.081",
+      "dateFinished": "2021-02-22 20:37:19.396",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n/* note that we need to order by date here \n even though we\u0027ve already sorted our data frame, if we don\u0027t to this \n zeppelin will group dates where we have values for each element in the group together \n and our graphs will come out with the order messed up */\nselect location, date, total_vaccinations from vaccinations order by date",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-22 21:02:37.489",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300.0,
+              "optionOpen": true,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "location": "string",
+                      "date": "string",
+                      "total_vaccinations": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "date",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "location",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "total_vaccinations",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "location\tdate\ttotal_vaccinations\nScotland\t2020-12-13\t18967\nNorthern Ireland\t2020-12-13\t3623\nWales\t2020-12-13\t8181\nScotland\t2020-12-14\tnull\nNorthern Ireland\t2020-12-14\tnull\nWales\t2020-12-14\tnull\nNorthern Ireland\t2020-12-15\tnull\nRussia\t2020-12-15\t28500\nScotland\t2020-12-15\tnull\nWales\t2020-12-15\tnull\nWorld\t2020-12-15\t1528500\nChina\t2020-12-15\t1500000\nScotland\t2020-12-16\tnull\nWales\t2020-12-16\tnull\nWorld\t2020-12-16\tnull\nChina\t2020-12-16\tnull\nNorthern Ireland\t2020-12-16\tnull\nRussia\t2020-12-16\tnull\nNorthern Ireland\t2020-12-17\tnull\nRussia\t2020-12-17\tnull\nScotland\t2020-12-17\tnull\nWales\t2020-12-17\tnull\nChina\t2020-12-17\tnull\nWorld\t2020-12-17\tnull\nRussia\t2020-12-18\tnull\nChina\t2020-12-18\tnull\nNorthern Ireland\t2020-12-18\tnull\nWales\t2020-12-18\tnull\nScotland\t2020-12-18\tnull\nWorld\t2020-12-18\tnull\nNorthern Ireland\t2020-12-19\tnull\nChina\t2020-12-19\tnull\nRussia\t2020-12-19\tnull\nIsrael\t2020-12-19\t57\nWales\t2020-12-19\tnull\nScotland\t2020-12-19\tnull\nWorld\t2020-12-19\t1528557\nCanada\t2020-12-19\tnull\nEngland\t2020-12-20\t570199\nNorthern Ireland\t2020-12-20\t16068\nIsrael\t2020-12-20\t7368\nRussia\t2020-12-20\tnull\nScotland\t2020-12-20\t59832\nUnited Kingdom\t2020-12-20\t669674\nUnited States\t2020-12-20\t556208\nWales\t2020-12-20\t23575\nChina\t2020-12-20\tnull\nWorld\t2020-12-20\t2761750\nChina\t2020-12-21\tnull\nIsrael\t2020-12-21\t32125\nNorthern Ireland\t2020-12-21\tnull\nRussia\t2020-12-21\tnull\nScotland\t2020-12-21\tnull\nUnited Kingdom\t2020-12-21\tnull\nUnited States\t2020-12-21\t614117\nWales\t2020-12-21\tnull\nWorld\t2020-12-21\t2844416\nEngland\t2020-12-21\tnull\nWales\t2020-12-22\tnull\nChina\t2020-12-22\tnull\nScotland\t2020-12-22\tnull\nWorld\t2020-12-22\t2912176\nUnited Kingdom\t2020-12-22\tnull\nUnited States\t2020-12-22\tnull\nEngland\t2020-12-22\tnull\nIsrael\t2020-12-22\t76385\nNorthern Ireland\t2020-12-22\tnull\nRussia\t2020-12-22\t52000\nEngland\t2020-12-23\tnull\nNorthern Ireland\t2020-12-23\tnull\nIsrael\t2020-12-23\t138085\nRussia\t2020-12-23\tnull\nScotland\t2020-12-23\tnull\nSwitzerland\t2020-12-23\t0\nUnited Kingdom\t2020-12-23\tnull\nUnited States\t2020-12-23\t1008025\nWales\t2020-12-23\tnull\nChina\t2020-12-23\tnull\nWorld\t2020-12-23\t3406749\nBahrain\t2020-12-23\t38965\nChile\t2020-12-24\t420\nChina\t2020-12-24\tnull\nCosta Rica\t2020-12-24\t55\nEngland\t2020-12-24\tnull\nIsrael\t2020-12-24\t210281\nMexico\t2020-12-24\t2924\nRussia\t2020-12-24\tnull\nNorthern Ireland\t2020-12-24\tnull\nScotland\t2020-12-24\tnull\nSwitzerland\t2020-12-24\tnull\nUnited Kingdom\t2020-12-24\tnull\nUnited States\t2020-12-24\tnull\nWales\t2020-12-24\tnull\nWorld\t2020-12-24\t3493450\nBahrain\t2020-12-24\t50071\nChile\t2020-12-25\t5191\nCosta Rica\t2020-12-25\tnull\nEngland\t2020-12-25\tnull\nIsrael\t2020-12-25\t248032\nMexico\t2020-12-25\tnull\nNorthern Ireland\t2020-12-25\tnull\nScotland\t2020-12-25\tnull\nChina\t2020-12-25\tnull\nSwitzerland\t2020-12-25\tnull\nUnited Kingdom\t2020-12-25\tnull\nRussia\t2020-12-25\tnull\nWales\t2020-12-25\tnull\nUnited States\t2020-12-25\tnull\nWorld\t2020-12-25\t3536444\nBahrain\t2020-12-25\t50543\nUnited Kingdom\t2020-12-26\tnull\nWorld\t2020-12-26\t4509191\nBahrain\t2020-12-26\t51556\nCosta Rica\t2020-12-26\tnull\nCanada\t2020-12-26\tnull\nChina\t2020-12-26\tnull\nEngland\t2020-12-26\tnull\nIsrael\t2020-12-26\t280062\nUnited States\t2020-12-26\t1944585\nMexico\t2020-12-26\tnull\nRussia\t2020-12-26\tnull\nChile\t2020-12-26\t8335\nScotland\t2020-12-26\tnull\nSwitzerland\t2020-12-26\tnull\nNorthern Ireland\t2020-12-26\tnull\nWales\t2020-12-26\tnull\nCosta Rica\t2020-12-27\tnull\nCzechia\t2020-12-27\t1254\nDenmark\t2020-12-27\t6644\nEngland\t2020-12-27\t835475\nEuropean Union\t2020-12-27\t41597\nFrance\t2020-12-27\t13\nIsrael\t2020-12-27\t383353\nGermany\t2020-12-27\t23860\nUnited States\t2020-12-27\tnull\nItaly\t2020-12-27\t6957\nLithuania\t2020-12-27\t2418\nMexico\t2020-12-27\t6824\nNorthern Ireland\t2020-12-27\t31016\nNorway\t2020-12-27\t5\nSweden\t2020-12-27\t451\nRussia\t2020-12-27\tnull\nSwitzerland\t2020-12-27\tnull\nScotland\t2020-12-27\t94173\nWales\t2020-12-27\t35952\nUnited Kingdom\t2020-12-27\t996616\nWorld\t2020-12-27\t4987295\nBahrain\t2020-12-27\t53614\nChile\t2020-12-27\t8646\nChina\t2020-12-27\tnull\nChile\t2020-12-28\tnull\nChina\t2020-12-28\tnull\nCosta Rica\t2020-12-28\tnull\nCzechia\t2020-12-28\t3537\nDenmark\t2020-12-28\t8642\nEngland\t2020-12-28\tnull\nEstonia\t2020-12-28\t207\nGreece\t2020-12-28\t386\nFrance\t2020-12-28\t52\nGermany\t2020-12-28\t43694\nHungary\t2020-12-28\t1094\nIsrael\t2020-12-28\t516030\nItaly\t2020-12-28\t7905\nKuwait\t2020-12-28\t2500\nLithuania\t2020-12-28\t5203\nLatvia\t2020-12-28\t595\nMalta\t2020-12-28\t130\nMexico\t2020-12-28\t9579\nNorthern Ireland\t2020-12-28\tnull\nNorway\t2020-12-28\t605\nOman\t2020-12-28\t1717\nPoland\t2020-12-28\t2000\nRussia\t2020-12-28\tnull\nRomania\t2020-12-28\t2066\nScotland\t2020-12-28\tnull\nSweden\t2020-12-28\tnull\nSwitzerland\t2020-12-28\tnull\nUnited Kingdom\t2020-12-28\tnull\nUnited States\t2020-12-28\t2127143\nPortugal\t2020-12-28\t4828\nWales\t2020-12-28\tnull\nWorld\t2020-12-28\t5350993\nEuropean Union\t2020-12-28\t81088\nBahrain\t2020-12-28\t55014\nBelgium\t2020-12-28\t298\nBelgium\t2020-12-29\t299\nCosta Rica\t2020-12-29\tnull\nBahrain\t2020-12-29\t56041\nBulgaria\t2020-12-29\t1719\nChile\t2020-12-29\tnull\nChina\t2020-12-29\tnull\nDenmark\t2020-12-29\t17759\nEngland\t2020-12-29\tnull\nEstonia\t2020-12-29\t516\nEuropean Union\t2020-12-29\t162693\nFrance\t2020-12-29\t138\nGermany\t2020-12-29\t86940\nHungary\t2020-12-29\t2461\nGreece\t2020-12-29\t1056\nIsrael\t2020-12-29\t669900\nItaly\t2020-12-29\t8811\nKuwait\t2020-12-29\tnull\nLatvia\t2020-12-29\t1469\nLithuania\t2020-12-29\t8189\nMalta\t2020-12-29\tnull\nNorway\t2020-12-29\t1673\nCzechia\t2020-12-29\t6976\nNorthern Ireland\t2020-12-29\tnull\nOman\t2020-12-29\t3363\nPoland\t2020-12-29\t6300\nPortugal\t2020-12-29\t16701\nRomania\t2020-12-29\t2778\nRussia\t2020-12-29\tnull\nSweden\t2020-12-29\tnull\nMexico\t2020-12-29\t18529\nSwitzerland\t2020-12-29\tnull\nUnited Kingdom\t2020-12-29\tnull\nScotland\t2020-12-29\tnull\nWales\t2020-12-29\tnull\nUnited States\t2020-12-29\tnull\nWorld\t2020-12-29\t5599859\nArgentina\t2020-12-29\t700\nOman\t2020-12-30\t5043\nUnited States\t2020-12-30\t2794588\nScotland\t2020-12-30\tnull\nBelgium\t2020-12-30\t778\nNorthern Ireland\t2020-12-30\tnull\nNorway\t2020-12-30\t2095\nPoland\t2020-12-30\t36300\nPortugal\t2020-12-30\t26850\nRomania\t2020-12-30\t5666\nUnited Kingdom\t2020-12-30\tnull\nWales\t2020-12-30\tnull\nWorld\t2020-12-30\t6569982\nSweden\t2020-12-30\tnull\nSwitzerland\t2020-12-30\tnull\nRussia\t2020-12-30\tnull\nArgentina\t2020-12-30\tnull\nBahrain\t2020-12-30\t57317\nBulgaria\t2020-12-30\t4608\nChile\t2020-12-30\tnull\nChina\t2020-12-30\tnull\nCosta Rica\t2020-12-30\tnull\nCroatia\t2020-12-30\t7864\nCzechia\t2020-12-30\t10439\nEngland\t2020-12-30\tnull\nDenmark\t2020-12-30\t29396\nEstonia\t2020-12-30\t884\nEuropean Union\t2020-12-30\t300264\nFrance\t2020-12-30\t237\nGermany\t2020-12-30\t144572\nGreece\t2020-12-30\t1709\nHungary\t2020-12-30\t3789\nItaly\t2020-12-30\t13408\nIceland\t2020-12-30\t4875\nIsrael\t2020-12-30\t820285\nKuwait\t2020-12-30\tnull\nLatvia\t2020-12-30\t2261\nLithuania\t2020-12-30\t9722\nLuxembourg\t2020-12-30\t1200\nMalta\t2020-12-30\tnull\nMonaco\t2020-12-30\t0\nMexico\t2020-12-30\t24998\nBulgaria\t2020-12-31\tnull\nChile\t2020-12-31\tnull\nCosta Rica\t2020-12-31\tnull\nEngland\t2020-12-31\tnull\nCzechia\t2020-12-31\t11744\nEuropean Union\t2020-12-31\t393634\nHungary\t2020-12-31\t5110\nIsrael\t2020-12-31\t976675\nMexico\t2020-12-31\tnull\nLuxembourg\t2020-12-31\tnull\nMonaco\t2020-12-31\tnull\nPortugal\t2020-12-31\tnull\nScotland\t2020-12-31\tnull\nWales\t2020-12-31\tnull\nBahrain\t2020-12-31\t58643\nChina\t2020-12-31\t4500000\nCroatia\t2020-12-31\tnull\nDenmark\t2020-12-31\t35732\nEstonia\t2020-12-31\t1907\nFinland\t2020-12-31\t1767\nFrance\t2020-12-31\t316\nGermany\t2020-12-31\t182631\nGreece\t2020-12-31\t2313\nIceland\t2020-12-31\tnull\nIreland\t2020-12-31\t1800\nItaly\t2020-12-31\t38527\nKuwait\t2020-12-31\tnull\nLatvia\t2020-12-31\tnull\nMalta\t2020-12-31\tnull\nNorthern Ireland\t2020-12-31\tnull\nNorway\t2020-12-31\t2167\nOman\t2020-12-31\t6516\nPoland\t2020-12-31\t47600\nRomania\t2020-12-31\t10289\nRussia\t2020-12-31\tnull\nSweden\t2020-12-31\tnull\nSwitzerland\t2020-12-31\tnull\nUnited Kingdom\t2020-12-31\tnull\nArgentina\t2020-12-31\t32013\nWorld\t2020-12-31\t9853926\nUnited States\t2020-12-31\tnull\nBelgium\t2020-12-31\t787\nLithuania\t2020-12-31\t9747\nCroatia\t2021-01-01\tnull\nChina\t2021-01-01\tnull\nCosta Rica\t2021-01-01\tnull\nCzechia\t2021-01-01\t12006\nBahrain\t2021-01-01\t59351\nEuropean Union\t2021-01-01\t434030\nHungary\t2021-01-01\tnull\nIreland\t2021-01-01\tnull\nLithuania\t2021-01-01\tnull\nMexico\t2021-01-01\tnull\nPoland\t2021-01-01\tnull\nGreece\t2021-01-01\t2591\nRomania\t2021-01-01\t11656\nSwitzerland\t2021-01-01\tnull\nNorway\t2021-01-01\t2173\nItaly\t2021-01-01\t49439\nDenmark\t2021-01-01\t38117\nEngland\t2021-01-01\tnull\nEstonia\t2021-01-01\t2487\nFinland\t2021-01-01\tnull\nFrance\t2021-01-01\t325\nGermany\t2021-01-01\t207096\nIceland\t2021-01-01\tnull\nBelgium\t2021-01-01\t794\nIsrael\t2021-01-01\t1047200\nKuwait\t2021-01-01\tnull\nLatvia\t2021-01-01\tnull\nLuxembourg\t2021-01-01\tnull\nMalta\t2021-01-01\tnull\nMonaco\t2021-01-01\tnull\nBulgaria\t2021-01-01\t4739\nNorthern Ireland\t2021-01-01\tnull\nOman\t2021-01-01\tnull\nPortugal\t2021-01-01\tnull\nRussia\t2021-01-01\tnull\nScotland\t2021-01-01\tnull\nChile\t2021-01-01\tnull\nArgentina\t2021-01-01\tnull\nUnited Kingdom\t2021-01-01\tnull\nUnited States\t2021-01-01\tnull\nWorld\t2021-01-01\t9965561\nSweden\t2021-01-01\tnull\nWales\t2021-01-01\tnull\nCzechia\t2021-01-02\t13262\nCroatia\t2021-01-02\tnull\nDenmark\t2021-01-02\t47149\nEngland\t2021-01-02\tnull\nGermany\t2021-01-02\t257663\nArgentina\t2021-01-02\tnull\nKuwait\t2021-01-02\tnull\nIsrael\t2021-01-02\t1118137\nLithuania\t2021-01-02\tnull\nBulgaria\t2021-01-02\tnull\nOman\t2021-01-02\t7231\nSwitzerland\t2021-01-02\tnull\nChile\t2021-01-02\tnull\nChina\t2021-01-02\tnull\nCosta Rica\t2021-01-02\tnull\nBahrain\t2021-01-02\t60097\nEstonia\t2021-01-02\tnull\nEuropean Union\t2021-01-02\t537732\nFinland\t2021-01-02\tnull\nFrance\t2021-01-02\t367\nGreece\t2021-01-02\t3132\nHungary\t2021-01-02\tnull\nIceland\t2021-01-02\tnull\nIreland\t2021-01-02\tnull\nBelgium\t2021-01-02\tnull\nItaly\t2021-01-02\t87326\nLatvia\t2021-01-02\tnull\nLuxembourg\t2021-01-02\tnull\nMalta\t2021-01-02\tnull\nMexico\t2021-01-02\tnull\nMonaco\t2021-01-02\tnull\nNorthern Ireland\t2021-01-02\tnull\nNorway\t2021-01-02\t2173\nPoland\t2021-01-02\t50391\nPortugal\t2021-01-02\tnull\nRomania\t2021-01-02\t13242\nSweden\t2021-01-02\tnull\nUnited Kingdom\t2021-01-02\tnull\nUnited States\t2021-01-02\t4225756\nWales\t2021-01-02\tnull\nWorld\t2021-01-02\t12320829\nScotland\t2021-01-02\tnull\nCanada\t2021-01-02\tnull\nRussia\t2021-01-02\t800000\nCzechia\t2021-01-03\t14176\nDenmark\t2021-01-03\t53265\nEuropean Union\t2021-01-03\t633385\nEngland\t2021-01-03\t1182209\nFrance\t2021-01-03\t441\nIceland\t2021-01-03\tnull\nIsrael\t2021-01-03\t1264789\nMexico\t2021-01-03\tnull\nLuxembourg\t2021-01-03\tnull\nMonaco\t2021-01-03\tnull\nPoland\t2021-01-03\t50833\nRussia\t2021-01-03\tnull\nUnited Kingdom\t2021-01-03\t1389655\nSweden\t2021-01-03\t5266\nChina\t2021-01-03\tnull\nBahrain\t2021-01-03\t60689\nEstonia\t2021-01-03\t2517\nFinland\t2021-01-03\tnull\nGermany\t2021-01-03\t282642\nGreece\t2021-01-03\t3843\nHungary\t2021-01-03\t12000\nArgentina\t2021-01-03\tnull\nIreland\t2021-01-03\tnull\nBelgium\t2021-01-03\tnull\nItaly\t2021-01-03\t122149\nKuwait\t2021-01-03\tnull\nLatvia\t2021-01-03\tnull\nMalta\t2021-01-03\tnull\nBulgaria\t2021-01-03\tnull\nNorthern Ireland\t2021-01-03\t41956\nNorway\t2021-01-03\t2173\nOman\t2021-01-03\t8826\nPortugal\t2021-01-03\t32000\nRomania\t2021-01-03\t13596\nScotland\t2021-01-03\t115533\nSlovenia\t2021-01-03\t5934\nChile\t2021-01-03\tnull\nLithuania\t2021-01-03\tnull\nUnited States\t2021-01-03\tnull\nWorld\t2021-01-03\t12960760\nSwitzerland\t2021-01-03\tnull\nWales\t2021-01-03\t49957\nCosta Rica\t2021-01-03\t2455\nCroatia\t2021-01-03\t12285\nCzechia\t2021-01-04\t17739\nGermany\t2021-01-04\t331374\nCroatia\t2021-01-04\tnull\nDenmark\t2021-01-04\t55718\nEngland\t2021-01-04\tnull\nGreece\t2021-01-04\t9975\nIceland\t2021-01-04\tnull\nItaly\t2021-01-04\t189788\nLithuania\t2021-01-04\tnull\nNorthern Ireland\t2021-01-04\tnull\nMonaco\t2021-01-04\tnull\nOman\t2021-01-04\t10728\nScotland\t2021-01-04\tnull\nSpain\t2021-01-04\t82834\nWorld\t2021-01-04\t13744542\nFrance\t2021-01-04\t1800\nBahrain\t2021-01-04\t61612\nEstonia\t2021-01-04\t2535\nEuropean Union\t2021-01-04\t910231\nFinland\t2021-01-04\t3604\nHungary\t2021-01-04\t15000\nArgentina\t2021-01-04\t39599\nIreland\t2021-01-04\t4000\nBelgium\t2021-01-04\t795\nIsrael\t2021-01-04\t1404442\nKuwait\t2021-01-04\tnull\nLatvia\t2021-01-04\t2960\nLuxembourg\t2021-01-04\tnull\nMalta\t2021-01-04\t1940\nMexico\t2021-01-04\t43960\nBulgaria\t2021-01-04\tnull\nNorway\t2021-01-04\t2174\nPoland\t2021-01-04\t92220\nPortugal\t2021-01-04\tnull\nRomania\t2021-01-04\t25508\nRussia\t2021-01-04\tnull\nSlovakia\t2021-01-04\t0\nSlovenia\t2021-01-04\t7204\nSweden\t2021-01-04\tnull\nChile\t2021-01-04\t9051\nSwitzerland\t2021-01-04\tnull\nCosta Rica\t2021-01-04\tnull\nWales\t2021-01-04\tnull\nUnited Kingdom\t2021-01-04\tnull\nUnited States\t2021-01-04\t4563260\nChina\t2021-01-04\tnull\nPortugal\t2021-01-05\tnull\nLatvia\t2021-01-05\t3849\nRomania\t2021-01-05\t41609\nSlovakia\t2021-01-05\t425\nBulgaria\t2021-01-05\t5448\nLithuania\t2021-01-05\t10369\nMexico\t2021-01-05\t48236\nRussia\t2021-01-05\tnull\nSlovenia\t2021-01-05\t8901\nChile\t2021-01-05\t10494\nWales\t2021-01-05\tnull\nNorway\t2021-01-05\t5595\nCzechia\t2021-01-05\t22245\nItaly\t2021-01-05\t268511\nLuxembourg\t2021-01-05\tnull\nMonaco\t2021-01-05\tnull\nArgentina\t2021-01-05\tnull\nScotland\t2021-01-05\tnull\nSpain\t2021-01-05\t139339\nSwitzerland\t2021-01-05\tnull\nUnited Arab Emirates\t2021-01-05\t826301\nWorld\t2021-01-05\t15277152\nUnited States\t2021-01-05\t4836469\nOman\t2021-01-05\t12751\nCroatia\t2021-01-05\t13798\nDenmark\t2021-01-05\t69440\nBahrain\t2021-01-05\t63893\nEuropean Union\t2021-01-05\t1206923\nIceland\t2021-01-05\tnull\nGreece\t2021-01-05\t16233\nBelgium\t2021-01-05\t2316\nKuwait\t2021-01-05\tnull\nMalta\t2021-01-05\tnull\nNorthern Ireland\t2021-01-05\tnull\nSweden\t2021-01-05\tnull\nUnited Kingdom\t2021-01-05\tnull\nPoland\t2021-01-05\t140226\nChina\t2021-01-05\tnull\nCosta Rica\t2021-01-05\tnull\nEngland\t2021-01-05\tnull\nEstonia\t2021-01-05\t3188\nFinland\t2021-01-05\t5445\nFrance\t2021-01-05\t6744\nGermany\t2021-01-05\t383431\nHungary\t2021-01-05\t21000\nIreland\t2021-01-05\tnull\nIsrael\t2021-01-05\t1527406\nCyprus\t2021-01-06\t3901\nCzechia\t2021-01-06\t28042\nGreece\t2021-01-06\t20466\nDenmark\t2021-01-06\t89550\nHungary\t2021-01-06\t31500\nNorthern Ireland\t2021-01-06\tnull\nEngland\t2021-01-06\tnull\nIceland\t2021-01-06\tnull\nLatvia\t2021-01-06\t4625\nBulgaria\t2021-01-06\t7913\nSaudi Arabia\t2021-01-06\t100000\nUnited Arab Emirates\t2021-01-06\tnull\nBahrain\t2021-01-06\t68472\nEuropean Union\t2021-01-06\t1460022\nIreland\t2021-01-06\tnull\nBelgium\t2021-01-06\t6179\nLithuania\t2021-01-06\t13866\nMexico\t2021-01-06\t53185\nNorway\t2021-01-06\t14593\nPoland\t2021-01-06\t160359\nScotland\t2021-01-06\tnull\nSpain\t2021-01-06\tnull\nUnited Kingdom\t2021-01-06\tnull\nChina\t2021-01-06\tnull\nEstonia\t2021-01-06\t5009\nFinland\t2021-01-06\tnull\nFrance\t2021-01-06\t17064\nIsrael\t2021-01-06\t1628159\nItaly\t2021-01-06\t333249\nLuxembourg\t2021-01-06\tnull\nMonaco\t2021-01-06\tnull\nNetherlands\t2021-01-06\t6000\nOman\t2021-01-06\t14005\nPortugal\t2021-01-06\t42035\nRomania\t2021-01-06\t58554\nSlovakia\t2021-01-06\t6618\nSweden\t2021-01-06\tnull\nChile\t2021-01-06\t10699\nWorld\t2021-01-06\t16221317\nUnited States\t2021-01-06\t5306797\nCosta Rica\t2021-01-06\tnull\nGermany\t2021-01-06\t441839\nKuwait\t2021-01-06\tnull\nMalta\t2021-01-06\tnull\nArgentina\t2021-01-06\tnull\nRussia\t2021-01-06\tnull\nSlovenia\t2021-01-06\t12265\nSwitzerland\t2021-01-06\tnull\nWales\t2021-01-06\tnull\nCroatia\t2021-01-06\tnull\nCzechia\t2021-01-07\t35945\nDenmark\t2021-01-07\t107317\nFrance\t2021-01-07\t43282\nArgentina\t2021-01-07\tnull\nEngland\t2021-01-07\tnull\nGermany\t2021-01-07\t500435\nItaly\t2021-01-07\t424360\nNorthern Ireland\t2021-01-07\tnull\nRomania\t2021-01-07\t76400\nChile\t2021-01-07\tnull\nBahrain\t2021-01-07\t72239\nGreece\t2021-01-07\t26006\nIceland\t2021-01-07\tnull\nKuwait\t2021-01-07\tnull\nLuxembourg\t2021-01-07\tnull\nBulgaria\t2021-01-07\t11117\nNorway\t2021-01-07\t21139\nRussia\t2021-01-07\tnull\nSlovakia\t2021-01-07\t13631\nUnited Arab Emirates\t2021-01-07\t887697\nSwitzerland\t2021-01-07\tnull\nCroatia\t2021-01-07\t20603\nEstonia\t2021-01-07\t6632\nEuropean Union\t2021-01-07\t1851394\nHungary\t2021-01-07\t42549\nIreland\t2021-01-07\t15314\nBelgium\t2021-01-07\t14235\nLatvia\t2021-01-07\t5434\nMalta\t2021-01-07\tnull\nMexico\t2021-01-07\t58402\nOman\t2021-01-07\t14911\nPoland\t2021-01-07\t188956\nSaudi Arabia\t2021-01-07\t137862\nSlovenia\t2021-01-07\t16339\nSpain\t2021-01-07\t207323\nUnited Kingdom\t2021-01-07\tnull\nWales\t2021-01-07\tnull\nUnited States\t2021-01-07\t5919418\nCyprus\t2021-01-07\tnull\nCosta Rica\t2021-01-07\tnull\nFinland\t2021-01-07\t8155\nIsrael\t2021-01-07\t1741891\nLithuania\t2021-01-07\t18019\nMonaco\t2021-01-07\tnull\nPortugal\t2021-01-07\tnull\nScotland\t2021-01-07\tnull\nSweden\t2021-01-07\tnull\nWorld\t2021-01-07\t17454736\nNetherlands\t2021-01-07\t15000\nChina\t2021-01-07\tnull\nCroatia\t2021-01-08\t24985\nCyprus\t2021-01-08\tnull\nCzechia\t2021-01-08\t45842\nFrance\t2021-01-08\t76022\nDenmark\t2021-01-08\t115878\nGermany\t2021-01-08\t559911\nMexico\t2021-01-08\t67468\nEngland\t2021-01-08\tnull\nGreece\t2021-01-08\t34787\nBelgium\t2021-01-08\t23371\nMonaco\t2021-01-08\tnull\nPortugal\t2021-01-08\t70000\nSweden\t2021-01-08\tnull\nChina\t2021-01-08\tnull\nBahrain\t2021-01-08\t78291\nHungary\t2021-01-08\tnull\nIsrael\t2021-01-08\t1807226\nLatvia\t2021-01-08\t6339\nNetherlands\t2021-01-08\t27000\nBulgaria\t2021-01-08\t13355\nRomania\t2021-01-08\t92706\nSaudi Arabia\t2021-01-08\tnull\nChile\t2021-01-08\tnull\nSwitzerland\t2021-01-08\tnull\nSpain\t2021-01-08\t277976\nCosta Rica\t2021-01-08\t9751\nEstonia\t2021-01-08\t7973\nIceland\t2021-01-08\tnull\nItaly\t2021-01-08\t518902\nLithuania\t2021-01-08\t23191\nLuxembourg\t2021-01-08\tnull\nNorthern Ireland\t2021-01-08\tnull\nNorway\t2021-01-08\t22753\nOman\t2021-01-08\t14980\nArgentina\t2021-01-08\t107542\nScotland\t2021-01-08\tnull\nSerbia\t2021-01-08\t7000\nUnited Arab Emirates\t2021-01-08\t941556\nUnited Kingdom\t2021-01-08\tnull\nWales\t2021-01-08\tnull\nSlovenia\t2021-01-08\t19523\nEuropean Union\t2021-01-08\t2238401\nIreland\t2021-01-08\tnull\nKuwait\t2021-01-08\tnull\nMalta\t2021-01-08\tnull\nPoland\t2021-01-08\t198787\nRussia\t2021-01-08\tnull\nSlovakia\t2021-01-08\t20548\nUnited States\t2021-01-08\t6688231\nWorld\t2021-01-08\t18828790\nFinland\t2021-01-08\t11135\nCyprus\t2021-01-09\tnull\nCzechia\t2021-01-09\t47827\nLithuania\t2021-01-09\t23495\nDenmark\t2021-01-09\t117783\nEngland\t2021-01-09\tnull\nMalta\t2021-01-09\tnull\nLuxembourg\t2021-01-09\tnull\nEstonia\t2021-01-09\t10197\nHungary\t2021-01-09\tnull\nMexico\t2021-01-09\t74794\nNorway\t2021-01-09\t22885\nScotland\t2021-01-09\tnull\nSaudi Arabia\t2021-01-09\tnull\nBahrain\t2021-01-09\t84157\nFinland\t2021-01-09\tnull\nIceland\t2021-01-09\tnull\nIsrael\t2021-01-09\t1851181\nMonaco\t2021-01-09\tnull\nOman\t2021-01-09\t15023\nRomania\t2021-01-09\t102301\nSerbia\t2021-01-09\tnull\nSlovakia\t2021-01-09\t22281\nSwitzerland\t2021-01-09\tnull\nChile\t2021-01-09\tnull\nCroatia\t2021-01-09\t30000\nEuropean Union\t2021-01-09\t2427909\nFrance\t2021-01-09\t86315\nGermany\t2021-01-09\t616409\nIreland\t2021-01-09\tnull\nItaly\t2021-01-09\t605240\nKuwait\t2021-01-09\tnull\nNetherlands\t2021-01-09\t30000\nNorthern Ireland\t2021-01-09\tnull\nPoland\t2021-01-09\t200022\nArgentina\t2021-01-09\tnull\nCanada\t2021-01-09\tnull\nSeychelles\t2021-01-09\t0\nSlovenia\t2021-01-09\t19930\nSpain\t2021-01-09\tnull\nUnited Arab Emirates\t2021-01-09\t1020349\nWales\t2021-01-09\tnull\nUnited States\t2021-01-09\tnull\nCosta Rica\t2021-01-09\tnull\nGreece\t2021-01-09\t40163\nBelgium\t2021-01-09\t26548\nLatvia\t2021-01-09\t6644\nBulgaria\t2021-01-09\t13473\nPortugal\t2021-01-09\tnull\nRussia\t2021-01-09\tnull\nSweden\t2021-01-09\tnull\nUnited Kingdom\t2021-01-09\tnull\nWorld\t2021-01-09\t23654413\nChina\t2021-01-09\t9000000\nChina\t2021-01-10\tnull\nCosta Rica\t2021-01-10\tnull\nCroatia\t2021-01-10\tnull\nCyprus\t2021-01-10\t6035\nCzechia\t2021-01-10\t49533\nIceland\t2021-01-10\tnull\nRomania\t2021-01-10\t108294\nDenmark\t2021-01-10\t118598\nBahrain\t2021-01-10\t89250\nIreland\t2021-01-10\t40000\nLithuania\t2021-01-10\t23498\nRussia\t2021-01-10\tnull\nScotland\t2021-01-10\t166135\nPortugal\t2021-01-10\tnull\nEngland\t2021-01-10\t2333764\nEuropean Union\t2021-01-10\t2640668\nGermany\t2021-01-10\t649625\nBelgium\t2021-01-10\t26943\nItaly\t2021-01-10\t665318\nLuxembourg\t2021-01-10\tnull\nMonaco\t2021-01-10\tnull\nSaudi Arabia\t2021-01-10\tnull\nSerbia\t2021-01-10\t9300\nSlovenia\t2021-01-10\t20546\nUnited Kingdom\t2021-01-10\t2677971\nSwitzerland\t2021-01-10\tnull\nBulgaria\t2021-01-10\tnull\nEstonia\t2021-01-10\t10749\nFinland\t2021-01-10\tnull\nGibraltar\t2021-01-10\t420\nGreece\t2021-01-10\t44080\nIsrael\t2021-01-10\t1894031\nKuwait\t2021-01-10\tnull\nLatvia\t2021-01-10\t6980\nMalta\t2021-01-10\tnull\nNetherlands\t2021-01-10\t34000\nNorthern Ireland\t2021-01-10\t91954\nArgentina\t2021-01-10\tnull\nSeychelles\t2021-01-10\tnull\nSpain\t2021-01-10\tnull\nSweden\t2021-01-10\t32953\nUnited States\t2021-01-10\tnull\nWorld\t2021-01-10\t25279866\nUnited Arab Emirates\t2021-01-10\t1086568\nOman\t2021-01-10\t15907\nAustria\t2021-01-10\t6784\nFrance\t2021-01-10\t91629\nHungary\t2021-01-10\t71000\nBermuda\t2021-01-10\t0\nMexico\t2021-01-10\t81300\nNorway\t2021-01-10\t22991\nSlovakia\t2021-01-10\t25326\nChile\t2021-01-10\tnull\nWales\t2021-01-10\t86118\nPoland\t2021-01-10\t203053\nCroatia\t2021-01-11\tnull\nCyprus\t2021-01-11\tnull\nEuropean Union\t2021-01-11\t3072097\nCzechia\t2021-01-11\t59220\nFinland\t2021-01-11\t14196\nLuxembourg\t2021-01-11\t1943\nSerbia\t2021-01-11\tnull\nDenmark\t2021-01-11\t119256\nFrance\t2021-01-11\t125412\nIreland\t2021-01-11\tnull\nMalta\t2021-01-11\t4870\nOman\t2021-01-11\t18287\nSlovakia\t2021-01-11\t29221\nSeychelles\t2021-01-11\tnull\nEngland\t2021-01-11\t2474205\nGermany\t2021-01-11\t715094\nGibraltar\t2021-01-11\t1445\nBelgium\t2021-01-11\t32376\nKuwait\t2021-01-11\tnull\nMexico\t2021-01-11\t87060\nNetherlands\t2021-01-11\t35500\nPoland\t2021-01-11\t257834\nRussia\t2021-01-11\tnull\nSlovenia\t2021-01-11\t22484\nUnited Arab Emirates\t2021-01-11\t1167251\nSingapore\t2021-01-11\t3400\nChina\t2021-01-11\tnull\nEstonia\t2021-01-11\t10972\nGreece\t2021-01-11\t49645\nHungary\t2021-01-11\t78579\nIsrael\t2021-01-11\t1933372\nLatvia\t2021-01-11\t8346\nBermuda\t2021-01-11\tnull\nMonaco\t2021-01-11\tnull\nNorthern Ireland\t2021-01-11\t99475\nNorway\t2021-01-11\t23332\nPortugal\t2021-01-11\tnull\nSaudi Arabia\t2021-01-11\t178337\nArgentina\t2021-01-11\tnull\nSpain\t2021-01-11\t406091\nSweden\t2021-01-11\tnull\nUnited Kingdom\t2021-01-11\t2843815\nWorld\t2021-01-11\t28352983\nSwitzerland\t2021-01-11\tnull\nCosta Rica\t2021-01-11\tnull\nAustria\t2021-01-11\t11559\nBahrain\t2021-01-11\t92598\nIceland\t2021-01-11\tnull\nItaly\t2021-01-11\t745456\nLithuania\t2021-01-11\t25704\nBulgaria\t2021-01-11\t14161\nRomania\t2021-01-11\t125190\nScotland\t2021-01-11\t178799\nChile\t2021-01-11\tnull\nUnited States\t2021-01-11\t8987322\nWales\t2021-01-11\t91336\nCosta Rica\t2021-01-12\tnull\nCroatia\t2021-01-12\tnull\nCyprus\t2021-01-12\tnull\nIndonesia\t2021-01-12\t0\nCzechia\t2021-01-12\t72496\nIreland\t2021-01-12\tnull\nBulgaria\t2021-01-12\t15780\nDenmark\t2021-01-12\t119716\nEuropean Union\t2021-01-12\t3514772\nBelgium\t2021-01-12\t47852\nBermuda\t2021-01-12\tnull\nOman\t2021-01-12\t20649\nArgentina\t2021-01-12\tnull\nUnited Kingdom\t2021-01-12\t3067541\nEngland\t2021-01-12\t2661850\nFinland\t2021-01-12\t17617\nGibraltar\t2021-01-12\t2501\nIsrael\t2021-01-12\t1992101\nItaly\t2021-01-12\t825686\nLuxembourg\t2021-01-12\t2372\nMonaco\t2021-01-12\tnull\nPoland\t2021-01-12\t309620\nRomania\t2021-01-12\t140447\nScotland\t2021-01-12\t194955\nSingapore\t2021-01-12\t6200\nUnited States\t2021-01-12\t9327138\nChile\t2021-01-12\tnull\nEstonia\t2021-01-12\t11896\nFrance\t2021-01-12\t179119\nGreece\t2021-01-12\t56199\nHungary\t2021-01-12\t86929\nKuwait\t2021-01-12\tnull\nLatvia\t2021-01-12\t9972\nMalta\t2021-01-12\tnull\nNetherlands\t2021-01-12\t45000\nNorthern Ireland\t2021-01-12\t109257\nPortugal\t2021-01-12\tnull\nCanada\t2021-01-12\t267078\nRussia\t2021-01-12\tnull\nSerbia\t2021-01-12\tnull\nSlovakia\t2021-01-12\t39735\nSlovenia\t2021-01-12\t24462\nWales\t2021-01-12\t101479\nSwitzerland\t2021-01-12\tnull\nSweden\t2021-01-12\tnull\nAustria\t2021-01-12\t13172\nBahrain\t2021-01-12\t97776\nGermany\t2021-01-12\t796933\nIceland\t2021-01-12\tnull\nLithuania\t2021-01-12\t27789\nMexico\t2021-01-12\t92879\nNorway\t2021-01-12\t27609\nSaudi Arabia\t2021-01-12\tnull\nSeychelles\t2021-01-12\tnull\nSpain\t2021-01-12\t488122\nWorld\t2021-01-12\t29814900\nUnited Arab Emirates\t2021-01-12\t1275652\nChina\t2021-01-12\tnull\nIreland\t2021-01-13\t77303\nBelgium\t2021-01-13\t68134\nNorway\t2021-01-13\t37292\nIsrael\t2021-01-13\t2098732\nKuwait\t2021-01-13\tnull\nBulgaria\t2021-01-13\t17038\nSeychelles\t2021-01-13\t2000\nItaly\t2021-01-13\t917833\nLatvia\t2021-01-13\t11478\nBahrain\t2021-01-13\t101363\nOman\t2021-01-13\t22749\nCanada\t2021-01-13\t288488\nSingapore\t2021-01-13\tnull\nHungary\t2021-01-13\t96101\nIndonesia\t2021-01-13\tnull\nEngland\t2021-01-13\t2910027\nChina\t2021-01-13\t10000000\nCroatia\t2021-01-13\t34553\nMexico\t2021-01-13\t192567\nNetherlands\t2021-01-13\t47000\nFrance\t2021-01-13\t235786\nPoland\t2021-01-13\t369212\nGermany\t2021-01-13\t895093\nArgentina\t2021-01-13\t166833\nCzechia\t2021-01-13\t85784\nGreece\t2021-01-13\t64619\nSwitzerland\t2021-01-13\tnull\nChile\t2021-01-13\t14612\nDenmark\t2021-01-13\t132389\nLithuania\t2021-01-13\t33875\nEstonia\t2021-01-13\t13481\nLuxembourg\t2021-01-13\t2871\nEuropean Union\t2021-01-13\t4071308\nCyprus\t2021-01-13\tnull\nNorthern Ireland\t2021-01-13\t121711\nPortugal\t2021-01-13\tnull\nRomania\t2021-01-13\t154268\nRussia\t2021-01-13\t1000000\nGibraltar\t2021-01-13\tnull\nScotland\t2021-01-13\t211397\nSlovakia\t2021-01-13\t46243\nSlovenia\t2021-01-13\t29561\nSpain\t2021-01-13\t581638\nTurkey\t2021-01-13\t0\nCosta Rica\t2021-01-13\tnull\nIceland\t2021-01-13\tnull\nWorld\t2021-01-13\t33238679\nUnited States\t2021-01-13\t10278462\nMalta\t2021-01-13\tnull\nMonaco\t2021-01-13\tnull\nFinland\t2021-01-13\t23126\nAustria\t2021-01-13\t20064\nSaudi Arabia\t2021-01-13\tnull\nSerbia\t2021-01-13\tnull\nSweden\t2021-01-13\tnull\nUnited Arab Emirates\t2021-01-13\t1394580\nUnited Kingdom\t2021-01-13\t3356229\nWales\t2021-01-13\t113094\nBermuda\t2021-01-13\tnull\nCosta Rica\t2021-01-14\tnull\nIndonesia\t2021-01-14\tnull\nDenmark\t2021-01-14\t150266\nIreland\t2021-01-14\tnull\nIsrael\t2021-01-14\t2221666\nFrance\t2021-01-14\t306206\nBelgium\t2021-01-14\t89405\nLuxembourg\t2021-01-14\t3233\nPoland\t2021-01-14\t410480\nItaly\t2021-01-14\t1008896\nBermuda\t2021-01-14\tnull\nNorthern Cyprus\t2021-01-14\t0\nPortugal\t2021-01-14\tnull\nArgentina\t2021-01-14\tnull\nEngland\t2021-01-14\t3189674\nLatvia\t2021-01-14\t13295\nMalta\t2021-01-14\tnull\nMexico\t2021-01-14\t329983\nBahrain\t2021-01-14\t109566\nFinland\t2021-01-14\t33033\nRomania\t2021-01-14\t167612\nAustria\t2021-01-14\t29359\nGibraltar\t2021-01-14\tnull\nKuwait\t2021-01-14\tnull\nChina\t2021-01-14\tnull\nLithuania\t2021-01-14\t42477\nCroatia\t2021-01-14\t38000\nEuropean Union\t2021-01-14\t4600603\nMonaco\t2021-01-14\tnull\nCyprus\t2021-01-14\tnull\nNorway\t2021-01-14\t45667\nOman\t2021-01-14\t24204\nCanada\t2021-01-14\t310788\nGermany\t2021-01-14\t995569\nEstonia\t2021-01-14\t14879\nNetherlands\t2021-01-14\tnull\nNorthern Ireland\t2021-01-14\t133831\nBulgaria\t2021-01-14\t17686\n"
+          },
+          {
+            "type": "HTML",
+            "data": "\u003cdiv class\u003d\"result-alert alert-warning\" role\u003d\"alert\"\u003e\u003cbutton type\u003d\"button\" class\u003d\"close\" data-dismiss\u003d\"alert\" aria-label\u003d\"Close\"\u003e\u003cspan aria-hidden\u003d\"true\"\u003e\u0026times;\u003c/span\u003e\u003c/button\u003e\u003cstrong\u003eOutput is truncated\u003c/strong\u003e to 1000 rows. Learn more about \u003cstrong\u003ezeppelin.spark.maxResult\u003c/strong\u003e\u003c/div\u003e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d4"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612721660479_1717190221",
+      "id": "paragraph_1612721660479_1717190221",
+      "dateCreated": "2021-02-07 18:14:20.493",
+      "dateStarted": "2021-02-18 18:43:39.793",
+      "dateFinished": "2021-02-18 18:43:45.780",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val filterList \u003d Seq(\"United States\", \"United Kingdom\", \"France\")\nval filtered \u003d vaccinations\n                    .filter(col(\"location\").isin(filterList : _*))\n                    .sort(\"location\", \"date\")\nfiltered.createOrReplaceTempView(\"filtered\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-22 21:07:22.491",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mfilterList\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(United States, United Kingdom, France)\n\u001b[1m\u001b[34mfiltered\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [location: string, date: date ... 1 more field]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612719016185_518206160",
+      "id": "paragraph_1612719016185_518206160",
+      "dateCreated": "2021-02-07 17:30:16.185",
+      "dateStarted": "2021-02-22 21:07:22.567",
+      "dateFinished": "2021-02-22 21:07:23.170",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\nselect * from filtered sort by date",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-22 21:07:24.748",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "lineChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "location": "string",
+                      "date": "string",
+                      "total_vaccinations": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "scatterChart": {
+                  "group": {
+                    "name": "location",
+                    "index": 0.0,
+                    "aggr": "sum"
+                  },
+                  "xAxis": {
+                    "name": "date",
+                    "index": 1.0,
+                    "aggr": "sum"
+                  },
+                  "yAxis": {
+                    "name": "total_vaccinations",
+                    "index": 2.0,
+                    "aggr": "sum"
+                  }
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default",
+                  "stacked": false
+                }
+              },
+              "keys": [
+                {
+                  "name": "date",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [
+                {
+                  "name": "location",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "values": [
+                {
+                  "name": "total_vaccinations",
+                  "index": 2.0,
+                  "aggr": "sum"
+                }
+              ],
+              "commonSetting": {}
+            },
+            "helium": {}
+          }
+        },
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/sql"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "location\tdate\ttotal_vaccinations\nUnited Kingdom\t2020-12-20\t669674\nUnited States\t2020-12-20\t556208\nUnited Kingdom\t2020-12-21\tnull\nUnited States\t2020-12-21\t614117\nUnited Kingdom\t2020-12-22\tnull\nUnited States\t2020-12-22\tnull\nUnited Kingdom\t2020-12-23\tnull\nUnited States\t2020-12-23\t1008025\nUnited Kingdom\t2020-12-24\tnull\nUnited States\t2020-12-24\tnull\nUnited Kingdom\t2020-12-25\tnull\nUnited States\t2020-12-25\tnull\nUnited Kingdom\t2020-12-26\tnull\nUnited States\t2020-12-26\t1944585\nFrance\t2020-12-27\t13\nUnited Kingdom\t2020-12-27\t996616\nUnited States\t2020-12-27\tnull\nFrance\t2020-12-28\t52\nUnited Kingdom\t2020-12-28\tnull\nUnited States\t2020-12-28\t2127143\nFrance\t2020-12-29\t138\nUnited Kingdom\t2020-12-29\tnull\nUnited States\t2020-12-29\tnull\nFrance\t2020-12-30\t237\nUnited Kingdom\t2020-12-30\tnull\nUnited States\t2020-12-30\t2794588\nFrance\t2020-12-31\t316\nUnited Kingdom\t2020-12-31\tnull\nUnited States\t2020-12-31\tnull\nFrance\t2021-01-01\t325\nUnited Kingdom\t2021-01-01\tnull\nUnited States\t2021-01-01\tnull\nFrance\t2021-01-02\t367\nUnited Kingdom\t2021-01-02\tnull\nUnited States\t2021-01-02\t4225756\nFrance\t2021-01-03\t441\nUnited Kingdom\t2021-01-03\t1389655\nUnited States\t2021-01-03\tnull\nFrance\t2021-01-04\t1800\nUnited Kingdom\t2021-01-04\tnull\nUnited States\t2021-01-04\t4563260\nFrance\t2021-01-05\t6744\nUnited Kingdom\t2021-01-05\tnull\nUnited States\t2021-01-05\t4836469\nFrance\t2021-01-06\t17064\nUnited Kingdom\t2021-01-06\tnull\nUnited States\t2021-01-06\t5306797\nFrance\t2021-01-07\t43282\nUnited Kingdom\t2021-01-07\tnull\nUnited States\t2021-01-07\t5919418\nFrance\t2021-01-08\t76022\nUnited Kingdom\t2021-01-08\tnull\nUnited States\t2021-01-08\t6688231\nFrance\t2021-01-09\t86315\nUnited Kingdom\t2021-01-09\tnull\nUnited States\t2021-01-09\tnull\nFrance\t2021-01-10\t91629\nUnited Kingdom\t2021-01-10\t2677971\nUnited States\t2021-01-10\tnull\nFrance\t2021-01-11\t125412\nUnited Kingdom\t2021-01-11\t2843815\nUnited States\t2021-01-11\t8987322\nFrance\t2021-01-12\t179119\nUnited Kingdom\t2021-01-12\t3067541\nUnited States\t2021-01-12\t9327138\nFrance\t2021-01-13\t235786\nUnited Kingdom\t2021-01-13\t3356229\nUnited States\t2021-01-13\t10278462\nFrance\t2021-01-14\t306206\nUnited Kingdom\t2021-01-14\t3678180\nUnited States\t2021-01-14\t11148991\nFrance\t2021-01-15\t364846\nUnited Kingdom\t2021-01-15\t4006440\nUnited States\t2021-01-15\t12279180\nFrance\t2021-01-16\t382326\nUnited Kingdom\t2021-01-16\t4286830\nUnited States\t2021-01-16\tnull\nFrance\t2021-01-17\t391910\nUnited Kingdom\t2021-01-17\t4514802\nUnited States\t2021-01-17\tnull\nFrance\t2021-01-18\t468073\nUnited Kingdom\t2021-01-18\t4723443\nUnited States\t2021-01-18\tnull\nFrance\t2021-01-19\t585735\nUnited Kingdom\t2021-01-19\t5070365\nUnited States\t2021-01-19\t15707588\nFrance\t2021-01-20\t708973\nUnited Kingdom\t2021-01-20\t5437284\nUnited States\t2021-01-20\t16525281\nFrance\t2021-01-21\t850380\nUnited Kingdom\t2021-01-21\t5849899\nUnited States\t2021-01-21\t17546374\nFrance\t2021-01-22\t959716\nUnited Kingdom\t2021-01-22\t6329968\nUnited States\t2021-01-22\t19107959\nFrance\t2021-01-23\t995147\nUnited Kingdom\t2021-01-23\t6822981\nUnited States\t2021-01-23\t20537990\nFrance\t2021-01-24\t1003968\nUnited Kingdom\t2021-01-24\t7044048\nUnited States\t2021-01-24\t21848655\nFrance\t2021-01-25\t1075045\nUnited Kingdom\t2021-01-25\t7325773\nUnited States\t2021-01-25\t22734243\nFrance\t2021-01-26\t1171264\nUnited Kingdom\t2021-01-26\t7638543\nUnited States\t2021-01-26\t23540994\nFrance\t2021-01-27\t1274711\nUnited Kingdom\t2021-01-27\t7953250\nUnited States\t2021-01-27\t24652634\nFrance\t2021-01-28\t1396881\nUnited Kingdom\t2021-01-28\t8369438\nUnited States\t2021-01-28\t26193682\nFrance\t2021-01-29\t1494643\nUnited Kingdom\t2021-01-29\t8859372\nUnited States\t2021-01-29\t27884661\nFrance\t2021-01-30\t1525377\nUnited Kingdom\t2021-01-30\t9468382\nUnited States\t2021-01-30\t29577902\nFrance\t2021-01-31\t1533630\nUnited Kingdom\t2021-01-31\t9790576\nUnited States\t2021-01-31\t31123299\nFrance\t2021-02-01\t1609072\nUnited Kingdom\t2021-02-01\t10143511\nUnited States\t2021-02-01\t32222402\nUnited States\t2021-02-02\t32780860\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d24"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1612717997518_927583151",
+      "id": "paragraph_1612717997518_927583151",
+      "dateCreated": "2021-02-07 17:13:17.521",
+      "dateStarted": "2021-02-22 21:07:24.793",
+      "dateFinished": "2021-02-22 21:07:25.965",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import sqlContext.implicits._ // import so we can use $ rather than col(\"some_col\")\n\ncase class Details(location: String, isoCode:String, peopleVaccinated: Int, date: java.sql.Timestamp)\nval ds \u003d df.select($\"location\", $\"iso_code\" as \"isoCode\", $\"people_vaccinated\" as \"peopleVaccinated\", $\"date\").as[Details]\n\nds.filter(details \u003d\u003e details.location.aggre)",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-22 21:49:23.802",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import sqlContext.implicits._\ndefined class Details\n\u001b[1m\u001b[34mds\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613236467272_158997030",
+      "id": "paragraph_1613236467272_158997030",
+      "dateCreated": "2021-02-13 17:14:27.272",
+      "dateStarted": "2021-02-22 21:48:37.836",
+      "dateFinished": "2021-02-22 21:48:40.181",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2021-02-18 18:43:48.679",
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "enabled": true,
+        "results": {},
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "editorMode": "ace/mode/scala"
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613236483756_1695353785",
+      "id": "paragraph_1613236483756_1695353785",
+      "dateCreated": "2021-02-13 17:14:43.756",
+      "status": "FINISHED"
+    }
+  ],
+  "name": "Spark",
+  "id": "2FXUESBPX",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview2",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {
+    "isRunning": false
+  }
+}
