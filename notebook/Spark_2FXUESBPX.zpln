@@ -580,9 +580,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "import sqlContext.implicits._ // import so we can use $ rather than col(\"some_col\")\n\ncase class Details(location: String, isoCode:String, peopleVaccinated: Int, date: java.sql.Timestamp)\nval ds \u003d df.select($\"location\", $\"iso_code\" as \"isoCode\", $\"people_vaccinated\" as \"peopleVaccinated\", $\"date\").as[Details]\n\nds.filter(details \u003d\u003e details.location.aggre)",
+      "text": "import sqlContext.implicits._ // import so we can use $ rather than col(\"some_col\")\n\n// note we\u0027re defining peopleVaccinated as an Optional here, preventing any nasty surprises\ncase class Details(location: String, isoCode:String, peopleVaccinated: Option[Int], date: java.sql.Timestamp)\nval slimDF \u003d df.select($\"location\", $\"iso_code\" as \"isoCode\", $\"people_vaccinated\" as \"peopleVaccinated\", $\"date\")\nval ds \u003d slimDF.as[Details]\n\nval ukResults \u003d ds.filter(details \u003d\u003e details.location.equals(\"United Kingdom\"))\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-22 21:49:23.802",
+      "dateUpdated": "2021-02-23 19:34:47.973",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -605,7 +605,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import sqlContext.implicits._\ndefined class Details\n\u001b[1m\u001b[34mds\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n"
+            "data": "import sqlContext.implicits._\ndefined class Details\n\u001b[1m\u001b[34mslimDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n\u001b[1m\u001b[34mds\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n\u001b[1m\u001b[34mukResults\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n"
           }
         ]
       },
@@ -615,26 +615,99 @@
       "jobName": "paragraph_1613236467272_158997030",
       "id": "paragraph_1613236467272_158997030",
       "dateCreated": "2021-02-13 17:14:27.272",
-      "dateStarted": "2021-02-22 21:48:37.836",
-      "dateFinished": "2021-02-22 21:48:40.181",
+      "dateStarted": "2021-02-23 19:34:48.010",
+      "dateFinished": "2021-02-23 19:34:51.499",
       "status": "FINISHED"
     },
     {
+      "text": "%spark.sql\nselect * from tmp",
       "user": "anonymous",
-      "dateUpdated": "2021-02-18 18:43:48.679",
+      "dateUpdated": "2021-02-23 19:33:11.973",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
         "enabled": true,
-        "results": {},
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "location": "string",
+                      "isoCode": "string",
+                      "peopleVaccinated": "string",
+                      "date": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                }
+              },
+              "commonSetting": {}
+            }
+          }
+        },
         "editorSetting": {
-          "language": "scala",
+          "language": "sql",
           "editOnDblClick": false,
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "editorMode": "ace/mode/scala"
+        "editorMode": "ace/mode/sql"
       },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "location\tisoCode\tpeopleVaccinated\tdate\nUnited Kingdom\tGBR\t669674\t2020-12-20 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-21 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-22 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-23 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-24 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-25 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-26 00:00:00.0\nUnited Kingdom\tGBR\t996616\t2020-12-27 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-28 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-29 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-30 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-31 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-01 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-02 00:00:00.0\nUnited Kingdom\tGBR\t1367847\t2021-01-03 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-04 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-05 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-06 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-07 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-08 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-09 00:00:00.0\nUnited Kingdom\tGBR\t2286572\t2021-01-10 00:00:00.0\nUnited Kingdom\tGBR\t2431648\t2021-01-11 00:00:00.0\nUnited Kingdom\tGBR\t2639309\t2021-01-12 00:00:00.0\nUnited Kingdom\tGBR\t2918252\t2021-01-13 00:00:00.0\nUnited Kingdom\tGBR\t3234946\t2021-01-14 00:00:00.0\nUnited Kingdom\tGBR\t3559179\t2021-01-15 00:00:00.0\nUnited Kingdom\tGBR\t3837094\t2021-01-16 00:00:00.0\nUnited Kingdom\tGBR\t4062501\t2021-01-17 00:00:00.0\nUnited Kingdom\tGBR\t4266577\t2021-01-18 00:00:00.0\nUnited Kingdom\tGBR\t4609740\t2021-01-19 00:00:00.0\nUnited Kingdom\tGBR\t4973248\t2021-01-20 00:00:00.0\nUnited Kingdom\tGBR\t5383103\t2021-01-21 00:00:00.0\nUnited Kingdom\tGBR\t5861351\t2021-01-22 00:00:00.0\nUnited Kingdom\tGBR\t6353321\t2021-01-23 00:00:00.0\nUnited Kingdom\tGBR\t6573570\t2021-01-24 00:00:00.0\nUnited Kingdom\tGBR\t6853327\t2021-01-25 00:00:00.0\nUnited Kingdom\tGBR\t7164387\t2021-01-26 00:00:00.0\nUnited Kingdom\tGBR\t7476765\t2021-01-27 00:00:00.0\nUnited Kingdom\tGBR\t7891184\t2021-01-28 00:00:00.0\nUnited Kingdom\tGBR\t8378940\t2021-01-29 00:00:00.0\nUnited Kingdom\tGBR\t8977329\t2021-01-30 00:00:00.0\nUnited Kingdom\tGBR\t9296367\t2021-01-31 00:00:00.0\nUnited Kingdom\tGBR\t9646715\t2021-02-01 00:00:00.0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d33"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1613236483756_1695353785",
+      "id": "paragraph_1613236483756_1695353785",
+      "dateCreated": "2021-02-13 17:14:43.756",
+      "dateStarted": "2021-02-23 19:33:12.015",
+      "dateFinished": "2021-02-23 19:33:12.831",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%spark.sql\n",
+      "user": "anonymous",
+      "dateUpdated": "2021-02-23 19:29:16.960",
+      "config": {},
       "settings": {
         "params": {},
         "forms": {}
@@ -642,10 +715,10 @@
       "apps": [],
       "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1613236483756_1695353785",
-      "id": "paragraph_1613236483756_1695353785",
-      "dateCreated": "2021-02-13 17:14:43.756",
-      "status": "FINISHED"
+      "jobName": "paragraph_1614108556924_647614222",
+      "id": "paragraph_1614108556924_647614222",
+      "dateCreated": "2021-02-23 19:29:16.957",
+      "status": "READY"
     }
   ],
   "name": "Spark",
