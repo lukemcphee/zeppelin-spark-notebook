@@ -3,7 +3,7 @@
     {
       "text": "val hello \u003d \"hello world\"\nprintln(hello)",
       "user": "anonymous",
-      "dateUpdated": "2021-02-18 18:42:58.360",
+      "dateUpdated": "2021-02-23 21:18:24.331",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -37,14 +37,14 @@
       "jobName": "paragraph_1612622335709_1646379887",
       "id": "paragraph_1612622335709_1646379887",
       "dateCreated": "2021-02-06 14:38:55.709",
-      "dateStarted": "2021-02-18 18:42:59.039",
-      "dateFinished": "2021-02-18 18:43:01.060",
+      "dateStarted": "2021-02-23 21:18:24.426",
+      "dateFinished": "2021-02-23 21:18:26.234",
       "status": "FINISHED"
     },
     {
       "text": "import org.apache.spark.sql.SparkSession\n\nval spark \u003d SparkSession.builder.config(sc.getConf).getOrCreate()",
       "user": "anonymous",
-      "dateUpdated": "2021-02-18 18:43:01.174",
+      "dateUpdated": "2021-02-23 21:18:26.334",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -67,7 +67,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import org.apache.spark.sql.SparkSession\n\u001b[1m\u001b[34mspark\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m \u003d org.apache.spark.sql.SparkSession@43ad8293\n"
+            "data": "import org.apache.spark.sql.SparkSession\n\u001b[1m\u001b[34mspark\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.SparkSession\u001b[0m \u003d org.apache.spark.sql.SparkSession@162d6e44\n"
           }
         ]
       },
@@ -77,14 +77,14 @@
       "jobName": "paragraph_1612622440954_663230290",
       "id": "paragraph_1612622440954_663230290",
       "dateCreated": "2021-02-06 14:40:40.955",
-      "dateStarted": "2021-02-18 18:43:01.831",
-      "dateFinished": "2021-02-18 18:43:04.222",
+      "dateStarted": "2021-02-23 21:18:26.443",
+      "dateFinished": "2021-02-23 21:18:30.189",
       "status": "FINISHED"
     },
     {
       "text": "val df \u003d spark.read\n         .format(\"csv\")\n         .option(\"header\", \"true\") // first line in file is our headers\n         .option(\"mode\", \"DROPMALFORMED\")\n         .option(\"inferSchema\", \"true\") // allows us to access the underlying types, super helpful\n         .load(\"/notebook/vaccinations.csv\")\n         \ndf.printSchema",
       "user": "anonymous",
-      "dateUpdated": "2021-02-18 19:16:18.835",
+      "dateUpdated": "2021-02-23 21:18:30.204",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -120,10 +120,10 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d6"
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d0"
             },
             {
-              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d7"
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d1"
             }
           ],
           "interpreterSettingId": "spark"
@@ -133,14 +133,14 @@
       "jobName": "paragraph_1612622859146_2694864",
       "id": "paragraph_1612622859146_2694864",
       "dateCreated": "2021-02-06 14:47:39.146",
-      "dateStarted": "2021-02-18 19:16:18.888",
-      "dateFinished": "2021-02-18 19:16:21.665",
+      "dateStarted": "2021-02-23 21:18:30.391",
+      "dateFinished": "2021-02-23 21:18:39.729",
       "status": "FINISHED"
     },
     {
       "text": "val totalVaccinations \u003d df\n    .groupBy(\"location\")\n    .sum(\"daily_vaccinations\")\n    .sort(desc(\"sum(daily_vaccinations)\")) \n\n// alternatively if we want to use named fields we could do this\ndf.groupBy(\"location\")\n    .agg(sum(\"daily_vaccinations\") as \"vaccinationsSum\")\n    .sort(desc(\"vaccinationsSum\")) \n\ntotalVaccinations.show(10)",
       "user": "anonymous",
-      "dateUpdated": "2021-02-22 21:22:09.696",
+      "dateUpdated": "2021-02-23 21:18:39.784",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -176,7 +176,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d25"
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d2"
             }
           ],
           "interpreterSettingId": "spark"
@@ -186,14 +186,14 @@
       "jobName": "paragraph_1612623232734_733436876",
       "id": "paragraph_1612623232734_733436876",
       "dateCreated": "2021-02-06 14:53:52.734",
-      "dateStarted": "2021-02-22 21:22:09.756",
-      "dateFinished": "2021-02-22 21:22:13.580",
+      "dateStarted": "2021-02-23 21:18:39.888",
+      "dateFinished": "2021-02-23 21:18:49.626",
       "status": "FINISHED"
     },
     {
       "text": "val vaccinations \u003d df.select(\"location\", \"date\", \"total_vaccinations\")\n        .withColumn(\"date\", to_date(col(\"date\"),\"yyyy-MM-dd\")) // convert our dates into a more usable format\n        .sort(\"date\")\n        .sort(\"location\")\nvaccinations.createOrReplaceTempView(\"vaccinations\") \n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-22 20:53:00.137",
+      "dateUpdated": "2021-02-23 21:18:49.656",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -226,14 +226,14 @@
       "jobName": "paragraph_1612712267092_830189056",
       "id": "paragraph_1612712267092_830189056",
       "dateCreated": "2021-02-07 15:37:47.094",
-      "dateStarted": "2021-02-22 20:15:30.699",
-      "dateFinished": "2021-02-22 20:15:32.135",
+      "dateStarted": "2021-02-23 21:18:49.820",
+      "dateFinished": "2021-02-23 21:18:51.687",
       "status": "FINISHED"
     },
     {
       "text": "vaccinations\n    .filter(col(\"location\") \u003d\u003d\u003d \"United States\" ||  col(\"location\") \u003d\u003d\u003d \"United Kingdom\").sort(\"location\", \"date\")\n    .show(100)\n    ",
       "user": "anonymous",
-      "dateUpdated": "2021-02-22 20:37:17.990",
+      "dateUpdated": "2021-02-23 21:18:51.765",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -269,7 +269,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d23"
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d3"
             }
           ],
           "interpreterSettingId": "spark"
@@ -279,14 +279,14 @@
       "jobName": "paragraph_1612623387009_347893629",
       "id": "paragraph_1612623387009_347893629",
       "dateCreated": "2021-02-06 14:56:27.023",
-      "dateStarted": "2021-02-22 20:37:18.081",
-      "dateFinished": "2021-02-22 20:37:19.396",
+      "dateStarted": "2021-02-23 21:18:51.908",
+      "dateFinished": "2021-02-23 21:18:54.326",
       "status": "FINISHED"
     },
     {
       "text": "%spark.sql\n/* note that we need to order by date here \n even though we\u0027ve already sorted our data frame, if we don\u0027t to this \n zeppelin will group dates where we have values for each element in the group together \n and our graphs will come out with the order messed up */\nselect location, date, total_vaccinations from vaccinations order by date",
       "user": "anonymous",
-      "dateUpdated": "2021-02-22 21:02:37.489",
+      "dateUpdated": "2021-02-23 21:18:54.415",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -394,14 +394,14 @@
       "jobName": "paragraph_1612721660479_1717190221",
       "id": "paragraph_1612721660479_1717190221",
       "dateCreated": "2021-02-07 18:14:20.493",
-      "dateStarted": "2021-02-18 18:43:39.793",
-      "dateFinished": "2021-02-18 18:43:45.780",
+      "dateStarted": "2021-02-23 21:18:54.521",
+      "dateFinished": "2021-02-23 21:18:56.047",
       "status": "FINISHED"
     },
     {
       "text": "val filterList \u003d Seq(\"United States\", \"United Kingdom\", \"France\")\nval filtered \u003d vaccinations\n                    .filter(col(\"location\").isin(filterList : _*))\n                    .sort(\"location\", \"date\")\nfiltered.createOrReplaceTempView(\"filtered\")\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-22 21:07:22.491",
+      "dateUpdated": "2021-02-23 21:18:56.127",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -434,14 +434,14 @@
       "jobName": "paragraph_1612719016185_518206160",
       "id": "paragraph_1612719016185_518206160",
       "dateCreated": "2021-02-07 17:30:16.185",
-      "dateStarted": "2021-02-22 21:07:22.567",
-      "dateFinished": "2021-02-22 21:07:23.170",
+      "dateStarted": "2021-02-23 21:18:56.303",
+      "dateFinished": "2021-02-23 21:18:58.144",
       "status": "FINISHED"
     },
     {
       "text": "%spark.sql\nselect * from filtered sort by date",
       "user": "anonymous",
-      "dateUpdated": "2021-02-22 21:07:24.748",
+      "dateUpdated": "2021-02-23 21:18:58.239",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -565,7 +565,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d24"
+              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d5"
             }
           ],
           "interpreterSettingId": "spark"
@@ -575,14 +575,14 @@
       "jobName": "paragraph_1612717997518_927583151",
       "id": "paragraph_1612717997518_927583151",
       "dateCreated": "2021-02-07 17:13:17.521",
-      "dateStarted": "2021-02-22 21:07:24.793",
-      "dateFinished": "2021-02-22 21:07:25.965",
+      "dateStarted": "2021-02-23 21:18:58.374",
+      "dateFinished": "2021-02-23 21:18:59.505",
       "status": "FINISHED"
     },
     {
-      "text": "import sqlContext.implicits._ // import so we can use $ rather than col(\"some_col\")\n\n// note we\u0027re defining peopleVaccinated as an Optional here, preventing any nasty surprises\ncase class Details(location: String, isoCode:String, peopleVaccinated: Option[Int], date: java.sql.Timestamp)\nval slimDF \u003d df.select($\"location\", $\"iso_code\" as \"isoCode\", $\"people_vaccinated\" as \"peopleVaccinated\", $\"date\")\nval ds \u003d slimDF.as[Details]\n\nval ukResults \u003d ds.filter(details \u003d\u003e details.location.equals(\"United Kingdom\"))\n",
+      "text": "import sqlContext.implicits._ // import so we can use $ rather than col(\"some_col\")\n\n// note we\u0027re defining peopleVaccinated as an Optional here, preventing any nasty surprises\ncase class Details(\n    location: String, \n    isoCode:String, \n    peopleVaccinated: Option[Int], \n    date: java.sql.Timestamp\n)\n\nval detailsDs \u003d df.select(\n        $\"location\", \n        $\"iso_code\" as \"isoCode\", \n        $\"people_vaccinated\" as \"peopleVaccinated\",\n        $\"date\")\n    .as[Details]\n\nval ukResults \u003d detailsDs.filter(details \u003d\u003e details.location.equals(\"United Kingdom\"))\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-23 19:34:47.973",
+      "dateUpdated": "2021-02-23 21:19:17.919",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -605,7 +605,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "import sqlContext.implicits._\ndefined class Details\n\u001b[1m\u001b[34mslimDF\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n\u001b[1m\u001b[34mds\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n\u001b[1m\u001b[34mukResults\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n"
+            "data": "import sqlContext.implicits._\ndefined class Details\n\u001b[1m\u001b[34mdetailsDs\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n\u001b[1m\u001b[34mukResults\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Details]\u001b[0m \u003d [location: string, isoCode: string ... 2 more fields]\n"
           }
         ]
       },
@@ -615,14 +615,14 @@
       "jobName": "paragraph_1613236467272_158997030",
       "id": "paragraph_1613236467272_158997030",
       "dateCreated": "2021-02-13 17:14:27.272",
-      "dateStarted": "2021-02-23 19:34:48.010",
-      "dateFinished": "2021-02-23 19:34:51.499",
+      "dateStarted": "2021-02-23 21:18:59.662",
+      "dateFinished": "2021-02-23 21:19:04.261",
       "status": "FINISHED"
     },
     {
       "text": "%spark.sql\nselect * from tmp",
       "user": "anonymous",
-      "dateUpdated": "2021-02-23 19:33:11.973",
+      "dateUpdated": "2021-02-23 21:19:04.363",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
@@ -672,36 +672,23 @@
         "forms": {}
       },
       "results": {
-        "code": "SUCCESS",
+        "code": "ERROR",
         "msg": [
           {
-            "type": "TABLE",
-            "data": "location\tisoCode\tpeopleVaccinated\tdate\nUnited Kingdom\tGBR\t669674\t2020-12-20 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-21 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-22 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-23 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-24 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-25 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-26 00:00:00.0\nUnited Kingdom\tGBR\t996616\t2020-12-27 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-28 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-29 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-30 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2020-12-31 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-01 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-02 00:00:00.0\nUnited Kingdom\tGBR\t1367847\t2021-01-03 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-04 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-05 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-06 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-07 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-08 00:00:00.0\nUnited Kingdom\tGBR\tnull\t2021-01-09 00:00:00.0\nUnited Kingdom\tGBR\t2286572\t2021-01-10 00:00:00.0\nUnited Kingdom\tGBR\t2431648\t2021-01-11 00:00:00.0\nUnited Kingdom\tGBR\t2639309\t2021-01-12 00:00:00.0\nUnited Kingdom\tGBR\t2918252\t2021-01-13 00:00:00.0\nUnited Kingdom\tGBR\t3234946\t2021-01-14 00:00:00.0\nUnited Kingdom\tGBR\t3559179\t2021-01-15 00:00:00.0\nUnited Kingdom\tGBR\t3837094\t2021-01-16 00:00:00.0\nUnited Kingdom\tGBR\t4062501\t2021-01-17 00:00:00.0\nUnited Kingdom\tGBR\t4266577\t2021-01-18 00:00:00.0\nUnited Kingdom\tGBR\t4609740\t2021-01-19 00:00:00.0\nUnited Kingdom\tGBR\t4973248\t2021-01-20 00:00:00.0\nUnited Kingdom\tGBR\t5383103\t2021-01-21 00:00:00.0\nUnited Kingdom\tGBR\t5861351\t2021-01-22 00:00:00.0\nUnited Kingdom\tGBR\t6353321\t2021-01-23 00:00:00.0\nUnited Kingdom\tGBR\t6573570\t2021-01-24 00:00:00.0\nUnited Kingdom\tGBR\t6853327\t2021-01-25 00:00:00.0\nUnited Kingdom\tGBR\t7164387\t2021-01-26 00:00:00.0\nUnited Kingdom\tGBR\t7476765\t2021-01-27 00:00:00.0\nUnited Kingdom\tGBR\t7891184\t2021-01-28 00:00:00.0\nUnited Kingdom\tGBR\t8378940\t2021-01-29 00:00:00.0\nUnited Kingdom\tGBR\t8977329\t2021-01-30 00:00:00.0\nUnited Kingdom\tGBR\t9296367\t2021-01-31 00:00:00.0\nUnited Kingdom\tGBR\t9646715\t2021-02-01 00:00:00.0\n"
+            "type": "TEXT",
+            "data": "Error happens in sql: select * from tmp\njava.lang.reflect.InvocationTargetException\n\tat sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.lang.reflect.Method.invoke(Method.java:498)\n\tat org.apache.zeppelin.spark.SparkSqlInterpreter.internalInterpret(SparkSqlInterpreter.java:105)\n\tat org.apache.zeppelin.interpreter.AbstractInterpreter.interpret(AbstractInterpreter.java:47)\n\tat org.apache.zeppelin.interpreter.LazyOpenInterpreter.interpret(LazyOpenInterpreter.java:110)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:776)\n\tat org.apache.zeppelin.interpreter.remote.RemoteInterpreterServer$InterpretJob.jobRun(RemoteInterpreterServer.java:668)\n\tat org.apache.zeppelin.scheduler.Job.run(Job.java:172)\n\tat org.apache.zeppelin.scheduler.AbstractScheduler.runJob(AbstractScheduler.java:130)\n\tat org.apache.zeppelin.scheduler.ParallelScheduler.lambda$runJobInScheduler$0(ParallelScheduler.java:39)\n\tat java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)\n\tat java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)\n\tat java.lang.Thread.run(Thread.java:748)\nCaused by: org.apache.spark.sql.AnalysisException: Table or view not found: tmp; line 1 pos 14\n\tat org.apache.spark.sql.catalyst.analysis.package$AnalysisErrorAt.failAnalysis(package.scala:47)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveRelations$.org$apache$spark$sql$catalyst$analysis$Analyzer$ResolveRelations$$lookupTableFromCatalog(Analyzer.scala:731)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveRelations$.resolveRelation(Analyzer.scala:683)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveRelations$$anonfun$apply$8.applyOrElse(Analyzer.scala:713)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveRelations$$anonfun$apply$8.applyOrElse(Analyzer.scala:706)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1$$anonfun$apply$1.apply(AnalysisHelper.scala:90)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1$$anonfun$apply$1.apply(AnalysisHelper.scala:90)\n\tat org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(TreeNode.scala:69)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1.apply(AnalysisHelper.scala:89)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1.apply(AnalysisHelper.scala:86)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$.allowInvokingTransformsInAnalyzer(AnalysisHelper.scala:194)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$class.resolveOperatorsUp(AnalysisHelper.scala:86)\n\tat org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperatorsUp(LogicalPlan.scala:29)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1$$anonfun$1.apply(AnalysisHelper.scala:87)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1$$anonfun$1.apply(AnalysisHelper.scala:87)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode$$anonfun$4.apply(TreeNode.scala:328)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.mapProductIterator(TreeNode.scala:186)\n\tat org.apache.spark.sql.catalyst.trees.TreeNode.mapChildren(TreeNode.scala:326)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1.apply(AnalysisHelper.scala:87)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$$anonfun$resolveOperatorsUp$1.apply(AnalysisHelper.scala:86)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$.allowInvokingTransformsInAnalyzer(AnalysisHelper.scala:194)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$class.resolveOperatorsUp(AnalysisHelper.scala:86)\n\tat org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.resolveOperatorsUp(LogicalPlan.scala:29)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveRelations$.apply(Analyzer.scala:706)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveRelations$.apply(Analyzer.scala:652)\n\tat org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1$$anonfun$apply$1.apply(RuleExecutor.scala:87)\n\tat org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1$$anonfun$apply$1.apply(RuleExecutor.scala:84)\n\tat scala.collection.LinearSeqOptimized$class.foldLeft(LinearSeqOptimized.scala:124)\n\tat scala.collection.immutable.List.foldLeft(List.scala:84)\n\tat org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1.apply(RuleExecutor.scala:84)\n\tat org.apache.spark.sql.catalyst.rules.RuleExecutor$$anonfun$execute$1.apply(RuleExecutor.scala:76)\n\tat scala.collection.immutable.List.foreach(List.scala:392)\n\tat org.apache.spark.sql.catalyst.rules.RuleExecutor.execute(RuleExecutor.scala:76)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer.org$apache$spark$sql$catalyst$analysis$Analyzer$$executeSameContext(Analyzer.scala:127)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer.execute(Analyzer.scala:121)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$$anonfun$executeAndCheck$1.apply(Analyzer.scala:106)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$$anonfun$executeAndCheck$1.apply(Analyzer.scala:105)\n\tat org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper$.markInAnalyzer(AnalysisHelper.scala:201)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer.executeAndCheck(Analyzer.scala:105)\n\tat org.apache.spark.sql.execution.QueryExecution.analyzed$lzycompute(QueryExecution.scala:58)\n\tat org.apache.spark.sql.execution.QueryExecution.analyzed(QueryExecution.scala:56)\n\tat org.apache.spark.sql.execution.QueryExecution.assertAnalyzed(QueryExecution.scala:48)\n\tat org.apache.spark.sql.Dataset$.ofRows(Dataset.scala:78)\n\tat org.apache.spark.sql.SparkSession.sql(SparkSession.scala:642)\n\tat org.apache.spark.sql.SQLContext.sql(SQLContext.scala:694)\n\t... 15 more\nCaused by: org.apache.spark.sql.catalyst.analysis.NoSuchTableException: Table or view \u0027tmp\u0027 not found in database \u0027default\u0027;\n\tat org.apache.spark.sql.catalyst.catalog.ExternalCatalog$class.requireTableExists(ExternalCatalog.scala:48)\n\tat org.apache.spark.sql.catalyst.catalog.InMemoryCatalog.requireTableExists(InMemoryCatalog.scala:45)\n\tat org.apache.spark.sql.catalyst.catalog.InMemoryCatalog.getTable(InMemoryCatalog.scala:326)\n\tat org.apache.spark.sql.catalyst.catalog.ExternalCatalogWithListener.getTable(ExternalCatalogWithListener.scala:138)\n\tat org.apache.spark.sql.catalyst.catalog.SessionCatalog.lookupRelation(SessionCatalog.scala:706)\n\tat org.apache.spark.sql.catalyst.analysis.Analyzer$ResolveRelations$.org$apache$spark$sql$catalyst$analysis$Analyzer$ResolveRelations$$lookupTableFromCatalog(Analyzer.scala:728)\n\t... 58 more\n"
           }
         ]
       },
       "apps": [],
-      "runtimeInfos": {
-        "jobUrl": {
-          "propertyName": "jobUrl",
-          "label": "SPARK JOB",
-          "tooltip": "View in Spark web UI",
-          "group": "spark",
-          "values": [
-            {
-              "jobUrl": "http://eeb900e82237:4040/jobs/job?id\u003d33"
-            }
-          ],
-          "interpreterSettingId": "spark"
-        }
-      },
+      "runtimeInfos": {},
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1613236483756_1695353785",
       "id": "paragraph_1613236483756_1695353785",
       "dateCreated": "2021-02-13 17:14:43.756",
-      "dateStarted": "2021-02-23 19:33:12.015",
-      "dateFinished": "2021-02-23 19:33:12.831",
-      "status": "FINISHED"
+      "dateStarted": "2021-02-23 21:19:04.402",
+      "dateFinished": "2021-02-23 21:19:04.568",
+      "status": "ERROR"
     }
   ],
   "name": "Spark",
@@ -714,5 +701,7 @@
   "config": {
     "isZeppelinNotebookCronEnable": false
   },
-  "info": {}
+  "info": {
+    "isRunning": false
+  }
 }
