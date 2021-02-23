@@ -702,23 +702,6 @@
       "dateStarted": "2021-02-23 19:33:12.015",
       "dateFinished": "2021-02-23 19:33:12.831",
       "status": "FINISHED"
-    },
-    {
-      "text": "%spark.sql\n",
-      "user": "anonymous",
-      "dateUpdated": "2021-02-23 19:29:16.960",
-      "config": {},
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1614108556924_647614222",
-      "id": "paragraph_1614108556924_647614222",
-      "dateCreated": "2021-02-23 19:29:16.957",
-      "status": "READY"
     }
   ],
   "name": "Spark",
@@ -731,7 +714,5 @@
   "config": {
     "isZeppelinNotebookCronEnable": false
   },
-  "info": {
-    "isRunning": false
-  }
+  "info": {}
 }
