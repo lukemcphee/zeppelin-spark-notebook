@@ -580,9 +580,9 @@
       "status": "FINISHED"
     },
     {
-      "text": "import sqlContext.implicits._ // import so we can use $ rather than col(\"some_col\")\n\n// note we\u0027re defining peopleVaccinated as an Optional here, preventing any nasty surprises\ncase class Details(\n    location: String, \n    isoCode:String, \n    peopleVaccinated: Option[Int], \n    date: java.sql.Timestamp\n)\n\nval detailsDs \u003d df.select(\n        $\"location\", \n        $\"iso_code\" as \"isoCode\", \n        $\"people_vaccinated\" as \"peopleVaccinated\",\n        $\"date\")\n    .as[Details]\n\nval ukResults \u003d detailsDs.filter(details \u003d\u003e details.location.equals(\"United Kingdom\"))\n",
+      "text": "aimport sqlContext.implicits._ // import so we can use $ rather than col(\"some_col\")\n\n// note we\u0027re defining peopleVaccinated as an Optional here, preventing any nasty surprises\ncase class Details(\n    location: String, \n    isoCode:String, \n    peopleVaccinated: Option[Int], \n    date: java.sql.Timestamp\n)\n\nval detailsDs \u003d df.select(\n        $\"location\", \n        $\"iso_code\" as \"isoCode\", \n        $\"people_vaccinated\" as \"peopleVaccinated\",\n        $\"date\")\n    .as[Details]\n\nval ukResults \u003d detailsDs.filter(details \u003d\u003e details.location.equals(\"United Kingdom\"))\n",
       "user": "anonymous",
-      "dateUpdated": "2021-02-23 21:19:17.919",
+      "dateUpdated": "2021-02-25 14:19:10.939",
       "config": {
         "colWidth": 12.0,
         "fontSize": 9.0,
